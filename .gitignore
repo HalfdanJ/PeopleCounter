@@ -14,3 +14,10 @@ build
 !default.mode1v3
 
 bin/*.app
+bin/*.dll
+bin/*.exe
+bin/*.ilk
+bin/*.pdb
+
+ipch
+obj

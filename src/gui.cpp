@@ -1,14 +1,14 @@
 #include "gui.h"
-#include "ofxSimpleGuiToo.h"
+/*#include "ofxSimpleGuiToo.h"
 
 ofVideoGrabber		vidGrabber;
 unsigned char * 	videoInverted;
 ofTexture			videoTexture;
-
+*/
 void Gui::setup(Kinect* kinectRef, Tracker * trackerRef){
 	kinect = kinectRef;
 	tracker = trackerRef;
-
+	/*
 	ofBackground(0, 0, 0);
 	ofSetVerticalSync(true);
 	
@@ -30,26 +30,26 @@ void Gui::setup(Kinect* kinectRef, Tracker * trackerRef){
 	
 	gui.loadFromXML();
 	
-	gui.show();
+	gui.show();*/
 }
 
 void Gui::update(){
-	// from ofVideoGrabber example (
+/*	// from ofVideoGrabber example (
 	vidGrabber.update();
 	if(vidGrabber.isFrameNew()){
 		int totalPixels = vidGrabber.getWidth() * vidGrabber.getHeight() * 3;
 		unsigned char * pixels = vidGrabber.getPixels();
 		for(int i = 0; i < totalPixels; i++) videoInverted[i] = 255 - pixels[i];
 		videoTexture.loadData(videoInverted, vidGrabber.getWidth(), vidGrabber.getHeight(), GL_RGB);
-	}	
+	}	*/
 }
 
 void Gui::draw(){
-	gui.draw();
+//	gui.draw();
 }
 
 void Gui::keyPressed (int key){ 
-	if(key>='0' && key<='9') {
+/*	if(key>='0' && key<='9') {
 		gui.setPage(key - '0');
 		gui.show();
 	} else {
@@ -59,5 +59,5 @@ void Gui::keyPressed (int key){
 			case ']': gui.nextPage(); break;
 			case 'p': gui.nextPageWithBlank(); break;
 		}
-	}
+	}*/
 }
