@@ -4,6 +4,8 @@
 #include "tracker.h"
 
 
+
+
 class Gui {
 public:
 	void setup(Kinect* kinectRef, Tracker * trackerRef);
@@ -12,4 +14,7 @@ public:
 	
 	Kinect * kinect;
 	Tracker * tracker;
+	
+	int		heightThreshold;
+	
 };
