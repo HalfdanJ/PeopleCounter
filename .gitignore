@@ -12,3 +12,5 @@ build
 
 !default.pbxuser
 !default.mode1v3
+
+bin/*.app

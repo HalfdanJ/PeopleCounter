@@ -2,7 +2,7 @@
 
 #include "kinect.h"
 #include "tracker.h"
-#include "synth.h"
+
 
 
 class Gui {
@@ -15,7 +15,6 @@ public:
 	
 	Kinect * kinect;
 	Tracker * tracker;
-	Synth * synth;
 	
 	int		heightThreshold;
 	
