@@ -3,6 +3,7 @@
 #include "kinect.h"
 #include "tracker.h"
 
+
 class Gui {
 public:
 	void setup(Kinect* kinectRef, Tracker * trackerRef);
