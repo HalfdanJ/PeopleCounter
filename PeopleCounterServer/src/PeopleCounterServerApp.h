@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "analyzer.h"
 #include "gui.h"
+#include "network.h"
 
 class peopleCounterServerApp : public ofBaseApp{
 
@@ -12,6 +13,7 @@ class peopleCounterServerApp : public ofBaseApp{
 		void draw();
 		
 	Gui * gui;
+	Network * network;
 
 		void keyPressed  (int key);
 		void keyReleased(int key);

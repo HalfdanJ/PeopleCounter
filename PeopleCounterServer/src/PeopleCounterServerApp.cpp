@@ -3,20 +3,23 @@
 //--------------------------------------------------------------
 void peopleCounterServerApp::setup(){
 	gui = new Gui();
+	network = new Network();
 	
 	gui->setup();
+	network->setup();
 
 }
 
 //--------------------------------------------------------------
 void peopleCounterServerApp::update(){
 	gui->update();
+	network->update();
 }
 
 //--------------------------------------------------------------
 void peopleCounterServerApp::draw(){
 	gui->draw();
-
+	network->debugDraw();
 }
 
 //--------------------------------------------------------------
