@@ -24,7 +24,7 @@ void peopleCounterServerApp::draw(){
 
 //--------------------------------------------------------------
 void peopleCounterServerApp::keyPressed(int key){
-
+	gui->keyPressed(key);
 }
 
 //--------------------------------------------------------------
