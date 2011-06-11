@@ -5,7 +5,6 @@ ofVideoGrabber		vidGrabber;
 unsigned char * 	videoInverted;
 ofTexture			videoTexture;
 
-
 void Gui::setup(){	
 	ofBackground(0, 0, 0);
 	ofSetVerticalSync(true);
@@ -16,7 +15,7 @@ void Gui::setup(){
 	videoTexture.allocate(vidGrabber.getWidth(), vidGrabber.getHeight(), GL_RGB);
 	
 	gui.addTitle("Analyzer");
-	gui.addSlider("Height threshold", heightThreshold, 0, 300);
+	gui.addSlider("Depth threshold", depthThreshold, 0, 255);
 	
 	gui.addPage("Network");
 	gui.addTitle("Slave 1");
@@ -26,10 +25,11 @@ void Gui::setup(){
 	gui.addTitle("Slave 3");
 	gui.addSlider("id", slave3id, 0, 10);
 	
-	gui.addColorPicker("BG Color", &aColor.r);
 	
+	
+	
+	//gui.addColorPicker("BG Color", &aColor.r);
 	//gui.addComboBox("box1", box1, 12, NULL);
-	
 	
 	//string titleArray[] = {"Lame", "Alright", "Better", "Best"};
 	//gui.addComboBox("box2", box2, 4,  titleArray);

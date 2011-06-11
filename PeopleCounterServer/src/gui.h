@@ -15,9 +15,15 @@ public:
 	
 	ofColor aColor;
 	
-	int		heightThreshold;
+	
+	// analyzer variables
+	int		depthThreshold;
+	
+	// network variables
 	int		slave1id;
 	int		slave2id;
 	int		slave3id;
+	
+	
 	
 };
