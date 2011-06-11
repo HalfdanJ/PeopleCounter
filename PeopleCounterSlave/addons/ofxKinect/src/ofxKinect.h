@@ -56,6 +56,8 @@ class ofxKinect : public ofxBase3DVideo, protected ofxThread{
 		/// set tilt angle of the camera in degrees
 		/// 0 is flat, the range is -30 to 30
 		bool setCameraTiltAngle(float angleInDegrees);
+    
+        bool setLedStatus(freenect_led_options led);
 	
 		float getDistanceAt(int x, int y);
 		float getDistanceAt(const ofPoint & p);
@@ -142,6 +144,9 @@ class ofxKinect : public ofxBase3DVideo, protected ofxThread{
         
 		float targetTiltAngleDeg;
 		bool bTiltNeedsApplying;
+    
+        freenect_led_options targetLedStatus;
+        bool bLedNeedsApplying;
 		
 
     private:

@@ -1,11 +1,15 @@
 #pragma once
 
 #include "ofMain.h"
+#include "gui.h"
+#include "defines.h"
 
 struct blob_data {
 	int bid;
 	float x;
 	float y;
+    float w;
+    float h;
 };
 
 
@@ -13,10 +17,12 @@ struct blob_data {
 
 class Analyzer {
 public:
-	void setup();
+	void setup(Gui * gui);
 	void update();
 	void debugDraw();
 	
-	vector< blob_data > blobData[3];
+    Gui * gui;
+	vector< blob_data > blobData[NUM_CLIENTS];
+    
 
 };

@@ -2,8 +2,7 @@
 
 //#include "network.h"
 #include "ofMain.h"
-#include "analyzer.h"
-
+#include "defines.h"
 
 class Gui {
 public:
@@ -25,6 +24,7 @@ public:
 	int		slave2id;
 	int		slave3id;
 	
-	
+    int clientOffset[NUM_CLIENTS];
+
 	
 };

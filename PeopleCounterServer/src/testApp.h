@@ -4,6 +4,7 @@
 #include "analyzer.h"
 #include "gui.h"
 #include "network.h"
+#include "defines.h"
 
 class testApp : public ofBaseApp{
 

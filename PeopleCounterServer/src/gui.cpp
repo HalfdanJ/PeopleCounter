@@ -1,10 +1,6 @@
 #include "gui.h"
 #include "ofxSimpleGuiToo.h"
 
-ofVideoGrabber		vidGrabber;
-unsigned char * 	videoInverted;
-ofTexture			videoTexture;
-
 void Gui::setup(){	
 	
 	depthThreshold = 100;
@@ -13,15 +9,17 @@ void Gui::setup(){
 	ofBackground(0, 0, 0);
 	ofSetVerticalSync(true);
 	
-	// for demonstrating adding any drawable object (that extends ofBaseDraw);	
-	vidGrabber.initGrabber(320, 240);	
-	videoInverted 	= new unsigned char[int(vidGrabber.getWidth() * vidGrabber.getHeight() * 3)];
-	videoTexture.allocate(vidGrabber.getWidth(), vidGrabber.getHeight(), GL_RGB);
-	
-	gui.addTitle("Analyzer");
+	gui.addTitle("Clients");
 	gui.addSlider("Depth threshold", depthThreshold, 0, 255);
-	gui.addSlider("Blur", blur, 0, 30);
+	gui.addSlider("Blur", blur, 0, 30);//.setNewColumn(true);
+
+    gui.addTitle("Analyzer").setNewColumn(true);
+    for(int i=0;i<NUM_CLIENTS;i++){
+        clientOffset[i] = 320*i;
+        gui.addSlider("Client"+ofToString(i)+"Offset", clientOffset[i], 0, 800);//.setNewColumn(true);
+    }
 	
+    
 	gui.addPage("Network");
 	gui.addTitle("Slave 1");
 	gui.addSlider("id", slave1id, 0, 10);
@@ -42,22 +40,12 @@ void Gui::setup(){
 
 void Gui::update(){
 	
-	ofBackground(aColor.r * 255, aColor.g * 255.0f, aColor.b * 255.0);
+	//ofBackground(aColor.r * 255, aColor.g * 255.0f, aColor.b * 255.0);
 	
 	
 	slave1id = -1;
 	slave2id = -1;
 	slave3id = -1;
-	
-	// from ofVideoGrabber example (
-	vidGrabber.update();
-	if(vidGrabber.isFrameNew()){
-		int totalPixels = vidGrabber.getWidth() * vidGrabber.getHeight() * 3;
-		unsigned char * pixels = vidGrabber.getPixels();
-		for(int i = 0; i < totalPixels; i++) videoInverted[i] = 255 - pixels[i];
-		videoTexture.loadData(videoInverted, vidGrabber.getWidth(), vidGrabber.getHeight(), GL_RGB);
-	}
-	
 }
 
 void Gui::draw(){

@@ -8,9 +8,11 @@ void testApp::setup(){
 	analyzer = new Analyzer();
 	
 	gui->setup();
-	analyzer->setup();
+	analyzer->setup(gui);
 	network->setup(analyzer, gui);
 
+    ofBackground(0,0,0);
+    ofSetFrameRate(30);
 }
 
 //--------------------------------------------------------------
