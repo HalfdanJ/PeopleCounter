@@ -7,7 +7,7 @@ struct blob_data {
 	int bid;
 	float x;
 	float y;
-};
+}
 
 class Tracker {
 public:
@@ -23,7 +23,13 @@ public:
 	ofxCvContourFinder contourFinder;
 	
 	int threshold;
+	int movement_threshold;
 	int blur;
 	
 	vector<blob_data> blobData;
+
+	int next_id;
+
+private:
+	vector<blob_data> oldBlobs;
 };
