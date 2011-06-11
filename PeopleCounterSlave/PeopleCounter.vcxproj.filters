@@ -32,7 +32,6 @@
     </ClCompile>
     <ClCompile Include="src\tracker.cpp" />
     <ClCompile Include="src\kinect.cpp" />
-    <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="addons\ofxKinect\src\ofxKinectPlayer.cpp">
       <Filter>addons\ofxKinect\src</Filter>
     </ClCompile>
@@ -112,7 +111,6 @@
       <Filter>addons\ofxOpenCV</Filter>
     </ClInclude>
     <ClInclude Include="src\kinect.h" />
-    <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\tracker.h" />
     <ClInclude Include="addons\ofxKinect\src\ofxKinectCalibration.h">
       <Filter>addons\ofxKinect\src</Filter>
