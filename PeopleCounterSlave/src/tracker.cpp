@@ -36,6 +36,8 @@ void Tracker::update(){
 			blob.x = blobClass.centroid.x;
 			blob.y = blobClass.centroid.y;
 			blob.bid = -1;
+			blob.w = blobClass.boundingRect.width;
+			blob.h = blobClass.boundingRect.height;
 			
 			// Looping through last frame's blobs to match these new ones
 			// to the old ones, and to apply their IDs.
