@@ -3,7 +3,7 @@
 void Network::setup(Tracker* trackerRef){
 	tracker = trackerRef;
 	
-	oscReceiver.setup(1111);
+	TCP.setup(1111);
 
 	serverConnected = false;
 	timeout = 500;
@@ -11,7 +11,7 @@ void Network::setup(Tracker* trackerRef){
 }
 
 
-void Network::update(){
+void Network::update(){	
 	if(serverConnected){
 		timeout --;
 		if(timeout < 0  ){
@@ -19,25 +19,31 @@ void Network::update(){
 			cout<<"Server timed out"<<endl;
 		}
 	}
-	while( oscReceiver.hasWaitingMessages() ){
-		timeout = 500;
-		
-		ofxOscMessage m;
-		oscReceiver.getNextMessage( &m );
-		
-		if ( m.getAddress() == "/connect" ){
-			myId = m.getArgAsInt32(0);
-			serverIp = m.getArgAsString(1);
-			connectToServer();
+	
+	
+	for(int i = 0; i < TCP.getNumClients(); i++){		
+		string recvstr = TCP.receive(i);
+		char * pch;
+		pch = strtok ((char*)recvstr.c_str(),";");
+		while (pch != NULL)
+		{
+			timeout = 500;
+			
+			printf ("%s\n",pch);
+			
+			receiveMessage(pch);
+			pch = strtok (NULL, ";");
 		}
 	}
-
 	
+
+
 	if(serverConnected){
 		//If server is connected, lets send some data
-		ofxOscMessage m;
-		m.setAddress("/ping");
-		oscSender.sendMessage( m );
+		string send = "ping";
+		for(int i = 0; i < TCP.getNumClients(); i++){
+		TCP.send(i,send);
+		}
 	}
 }
 
@@ -57,13 +63,23 @@ void Network::debugDraw(){
 
 }
 
-
+/*
 void Network::connectToServer(){
 	if(!serverConnected){
 		serverConnected = true;
-		oscSender.setup(serverIp,2000+myId);
+//		oscSender.setup(serverIp,2000+myId);
 	} else {
 		cout<<"Server already connected"<<endl;
 	}
 	
+}*/
+
+void Network::receiveMessage(string message){
+	cout<<"Recv "<<message<<endl;
+	if(message.substr(0,1) == "c"){
+		myId = atoi(message.substr(1,1).c_str());
+		serverConnected = true;
+	}
 }
+
+
