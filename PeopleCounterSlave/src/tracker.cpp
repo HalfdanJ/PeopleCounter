@@ -6,9 +6,9 @@ void Tracker::setup(Kinect* kinectRef){
 	
 	grayImage.allocate(640,480);
 	grayImageThreshold.allocate(640,480);
-	threshold = 80;
+	threshold = 255;
 	movement_threshold = 40;
-	blur = 0;
+	blur = 30;
 	
 	next_id = 0;
 }
