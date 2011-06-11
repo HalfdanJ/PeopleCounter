@@ -7,7 +7,8 @@ ofTexture			videoTexture;
 
 void Gui::setup(){	
 	
-	depthThreshold = 50;
+	depthThreshold = 100;
+	blur = 0;
 	
 	ofBackground(0, 0, 0);
 	ofSetVerticalSync(true);
@@ -19,6 +20,7 @@ void Gui::setup(){
 	
 	gui.addTitle("Analyzer");
 	gui.addSlider("Depth threshold", depthThreshold, 0, 255);
+	gui.addSlider("Blur", depthThreshold, 0, 30);
 	
 	gui.addPage("Network");
 	gui.addTitle("Slave 1");

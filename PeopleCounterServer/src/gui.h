@@ -18,6 +18,7 @@ public:
 	
 	// analyzer variables
 	int		depthThreshold;
+	int		blur;
 	
 	// network variables
 	int		slave1id;
