@@ -3,10 +3,10 @@
 
 
 #include "ofMain.h"
-
+#include "network.h"
 #include "kinect.h"
 #include "tracker.h"
-#include "network.h"
+
 
 class testApp : public ofBaseApp{
 	
