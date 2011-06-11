@@ -5,32 +5,48 @@ ofVideoGrabber		vidGrabber;
 unsigned char * 	videoInverted;
 ofTexture			videoTexture;
 
+
 void Gui::setup(){	
 	ofBackground(0, 0, 0);
 	ofSetVerticalSync(true);
 	
-	// for demonstrating adding any drawable object (that extends ofBaseDraw);
+	// for demonstrating adding any drawable object (that extends ofBaseDraw);	
 	vidGrabber.initGrabber(320, 240);	
 	videoInverted 	= new unsigned char[int(vidGrabber.getWidth() * vidGrabber.getHeight() * 3)];
 	videoTexture.allocate(vidGrabber.getWidth(), vidGrabber.getHeight(), GL_RGB);
 	
-	gui.addTitle("Input");
-	gui.addContent("Camera feed", vidGrabber);
-	
-	gui.addTitle("Counting").setNewColumn(true);
+	gui.addTitle("Analyzer");
 	gui.addSlider("Height threshold", heightThreshold, 0, 300);
-	gui.addContent("Inverted", videoTexture);
 	
-	gui.addTitle("Output").setNewColumn(true);
+	gui.addPage("Network");
+	gui.addTitle("Slave 1");
+	gui.addSlider("id", slave1id, 0, 10);
+	gui.addTitle("Slave 2");
+	gui.addSlider("id", slave2id, 0, 10);
+	gui.addTitle("Slave 3");
+	gui.addSlider("id", slave3id, 0, 10);
 	
-	gui.addPage("Status");
+	gui.addColorPicker("BG Color", &aColor.r);
+	
+	//gui.addComboBox("box1", box1, 12, NULL);
+	
+	
+	//string titleArray[] = {"Lame", "Alright", "Better", "Best"};
+	//gui.addComboBox("box2", box2, 4,  titleArray);
 	
 	gui.loadFromXML();
-	
 	gui.show();
 }
 
 void Gui::update(){
+	
+	ofBackground(aColor.r * 255, aColor.g * 255.0f, aColor.b * 255.0);
+	
+	
+	slave1id = -1;
+	slave2id = -1;
+	slave3id = -1;
+	
 	// from ofVideoGrabber example (
 	vidGrabber.update();
 	if(vidGrabber.isFrameNew()){
@@ -39,9 +55,13 @@ void Gui::update(){
 		for(int i = 0; i < totalPixels; i++) videoInverted[i] = 255 - pixels[i];
 		videoTexture.loadData(videoInverted, vidGrabber.getWidth(), vidGrabber.getHeight(), GL_RGB);
 	}
+	
 }
 
 void Gui::draw(){
+	
+	
+	
 	gui.draw();
 }
 
