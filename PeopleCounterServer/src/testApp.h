@@ -14,6 +14,7 @@ class testApp : public ofBaseApp{
 		
 	Gui * gui;
 	Network * network;
+	Analyzer * analyzer;
 
 		void keyPressed  (int key);
 		void keyReleased(int key);

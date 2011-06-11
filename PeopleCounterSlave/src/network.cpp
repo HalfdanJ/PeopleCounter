@@ -28,22 +28,11 @@ void Network::update(){
 		while (pch != NULL)
 		{
 			timeout = 500;
-			
-			printf ("%s\n",pch);
-			
 			receiveMessage(pch);
 			pch = strtok (NULL, ";");
 		}
-	}
-	
-
-
-	if(serverConnected){
-		//If server is connected, lets send some data
-		string send = "ping";
-		for(int i = 0; i < TCP.getNumClients(); i++){
-		TCP.send(i,send);
-		}
+		
+		sendMessage(i);
 	}
 }
 
@@ -59,20 +48,10 @@ void Network::debugDraw(){
 	
 	ofSetColor(255, 255, 255);
 	ofDrawBitmapString("My id: "+ofToString(myId, 0),640+320, 280);
-	ofDrawBitmapString("Server ip: "+serverIp,640+320, 290);
+//	ofDrawBitmapString("Server ip: "+TCP.getClientIP(TCP.getNumClients()-1),640+320, 290);
 
 }
 
-/*
-void Network::connectToServer(){
-	if(!serverConnected){
-		serverConnected = true;
-//		oscSender.setup(serverIp,2000+myId);
-	} else {
-		cout<<"Server already connected"<<endl;
-	}
-	
-}*/
 
 void Network::receiveMessage(string message){
 	cout<<"Recv "<<message<<endl;
@@ -80,6 +59,17 @@ void Network::receiveMessage(string message){
 		myId = atoi(message.substr(1,1).c_str());
 		serverConnected = true;
 	}
+}
+
+void Network::sendMessage(int i){
+	string send;
+	send += "b;";
+	for(int i=0;i<tracker->blobData.size();i++){
+		send += "i"+ofToString(tracker->blobData[i].bid,0)+";";
+		send += "x"+ofToString(tracker->blobData[i].x,0)+";";
+		send += "y"+ofToString(tracker->blobData[i].y,0)+";";
+	}
+	TCP.send(i,send);
 }
 
 

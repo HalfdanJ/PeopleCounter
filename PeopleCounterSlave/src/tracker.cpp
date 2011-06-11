@@ -7,6 +7,7 @@ void Tracker::setup(Kinect* kinectRef){
   grayImage.allocate(640,480);
   grayImageThreshold.allocate(640,480);
   threshold = 80;
+	movement_threshold = 40;
 
   next_id = 0;
 }
@@ -14,6 +15,8 @@ void Tracker::setup(Kinect* kinectRef){
 
 void Tracker::update(){
   if(kinect->kinect.isFrameNew()){
+	  blobData = vector<blob_data>();
+
 	int blobsIdentified = 0; // Unused as of yet. 
 
     grayImage.setFromPixels(kinect->kinect.getDepthPixels(), 640, 480);
@@ -46,6 +49,7 @@ void Tracker::update(){
 	  // Check if the blob hasn't been matched with an old one. It
 	  // means we have found a new person.
 	  if (blob.bid == -1) {
+//		  cout<<next_id<<endl;
 		blob.bid = next_id++;
 	  }
 	  
@@ -56,14 +60,20 @@ void Tracker::update(){
 
 	// Update the oldBlobs datastructure to giv
 	oldBlobs = blobData;
-	blobData = vector<blob_data>();
   }
 }
 
 
 void Tracker::debugDraw(){
+	ofSetColor(255, 255, 255);
   grayImage.draw(640,0,320,240);
   grayImageThreshold.draw(640+320,0,320,240);
   contourFinder.draw(640, 0, 320, 240);
-
+	
+	//cout<<blobData.size()<<endl;
+	ofSetColor(255, 0, 0);
+	for(int i=0;i<blobData.size();i++){
+		ofRect(blobData[i].x-5, blobData[i].y-5, 10, 10);
+		ofDrawBitmapString(ofToString(blobData[i].bid, 0), blobData[i].x+12, blobData[i].y);
+	}
 }
