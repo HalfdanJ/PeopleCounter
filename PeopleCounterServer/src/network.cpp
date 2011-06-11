@@ -1,8 +1,9 @@
 #include "network.h"
 
 void Network::setup(){
-
-	oscReceiver.setup(1111);
+	for(int i=0;i<3;i++){
+		oscReceiver.setup(2000+i);
+	}
 
 	serverConnected = false;
 	timeout = 500;

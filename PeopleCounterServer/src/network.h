@@ -12,14 +12,12 @@ public:
 	
 //	Tracker * tracker;
 	
-	ofxOscSender oscSender;
-	ofxOscReceiver oscReceiver;
+	ofxOscSender oscSender[3];
+	ofxOscReceiver oscReceiver[3];
 
-	void connectToServer();
+	void connectToClient(int client);
 	
-	bool serverConnected;
+	bool clientConnected[3];
 	
-	int myId;
-
-	int timeout;
+	int timeout[3];
 };
