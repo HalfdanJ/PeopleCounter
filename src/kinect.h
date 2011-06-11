@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "ofxKinect.h"
+#include "ofxKinect.h"
 
 class Kinect {
 public:
@@ -8,5 +8,5 @@ public:
 	void update();
 	void debugDraw();
 	
-//	ofxKinect kinect[3];
+	ofxKinect kinect[2];
 };
