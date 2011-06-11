@@ -5,7 +5,7 @@
 #include "gui.h"
 #include "network.h"
 
-class peopleCounterServerApp : public ofBaseApp{
+class testApp : public ofBaseApp{
 
 	public:
 		void setup();

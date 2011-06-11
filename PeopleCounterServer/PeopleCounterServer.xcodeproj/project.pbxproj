@@ -10,7 +10,7 @@
 		04823D4D13A3A6A80072B3F6 /* gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823D4613A3A6A80072B3F6 /* gui.cpp */; };
 		04823D4E13A3A6A80072B3F6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823D4813A3A6A80072B3F6 /* main.cpp */; };
 		04823D4F13A3A6A80072B3F6 /* synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823D4913A3A6A80072B3F6 /* synth.cpp */; };
-		04823D5013A3A6A80072B3F6 /* PeopleCounterServerApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823D4B13A3A6A80072B3F6 /* PeopleCounterServerApp.cpp */; };
+		04823D5013A3A6A80072B3F6 /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823D4B13A3A6A80072B3F6 /* testApp.cpp */; };
 		04823E1C13A3A8830072B3F6 /* analyzer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823E1B13A3A8830072B3F6 /* analyzer.cpp */; };
 		04823E2B13A3AA930072B3F6 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823E2413A3AA930072B3F6 /* tinyxml.cpp */; };
 		04823E2C13A3AA930072B3F6 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823E2613A3AA930072B3F6 /* tinyxmlerror.cpp */; };
@@ -119,8 +119,8 @@
 		04823D4813A3A6A80072B3F6 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		04823D4913A3A6A80072B3F6 /* synth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = synth.cpp; path = src/synth.cpp; sourceTree = SOURCE_ROOT; };
 		04823D4A13A3A6A80072B3F6 /* synth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = synth.h; path = src/synth.h; sourceTree = SOURCE_ROOT; };
-		04823D4B13A3A6A80072B3F6 /* PeopleCounterServerApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PeopleCounterServerApp.cpp; sourceTree = "<group>"; };
-		04823D4C13A3A6A80072B3F6 /* PeopleCounterServerApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleCounterServerApp.h; sourceTree = "<group>"; };
+		04823D4B13A3A6A80072B3F6 /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
+		04823D4C13A3A6A80072B3F6 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testApp.h; sourceTree = "<group>"; };
 		04823E1A13A3A8830072B3F6 /* analyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analyzer.h; sourceTree = "<group>"; };
 		04823E1B13A3A8830072B3F6 /* analyzer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = analyzer.cpp; sourceTree = "<group>"; };
 		04823E2213A3AA930072B3F6 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = install.xml; path = ../../../addons/ofxXmlSettings/install.xml; sourceTree = SOURCE_ROOT; };
@@ -852,8 +852,8 @@
 				04823D4813A3A6A80072B3F6 /* main.cpp */,
 				04823D4913A3A6A80072B3F6 /* synth.cpp */,
 				04823D4A13A3A6A80072B3F6 /* synth.h */,
-				04823D4B13A3A6A80072B3F6 /* PeopleCounterServerApp.cpp */,
-				04823D4C13A3A6A80072B3F6 /* PeopleCounterServerApp.h */,
+				04823D4B13A3A6A80072B3F6 /* testApp.cpp */,
+				04823D4C13A3A6A80072B3F6 /* testApp.h */,
 				04823E1A13A3A8830072B3F6 /* analyzer.h */,
 				04823E1B13A3A8830072B3F6 /* analyzer.cpp */,
 				DD98EF6313A3B0A30093BAAE /* network.cpp */,
@@ -1033,7 +1033,7 @@
 				04823D4D13A3A6A80072B3F6 /* gui.cpp in Sources */,
 				04823D4E13A3A6A80072B3F6 /* main.cpp in Sources */,
 				04823D4F13A3A6A80072B3F6 /* synth.cpp in Sources */,
-				04823D5013A3A6A80072B3F6 /* PeopleCounterServerApp.cpp in Sources */,
+				04823D5013A3A6A80072B3F6 /* testApp.cpp in Sources */,
 				04823E1C13A3A8830072B3F6 /* analyzer.cpp in Sources */,
 				04823E2B13A3AA930072B3F6 /* tinyxml.cpp in Sources */,
 				04823E2C13A3AA930072B3F6 /* tinyxmlerror.cpp in Sources */,
