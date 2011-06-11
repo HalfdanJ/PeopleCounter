@@ -2,6 +2,7 @@
 
 void Kinect::setup(){
 	kinect.init(false, false, true);
+	kinect.kindex = 0;
 	kinect.setVerbose(true);
 	kinect.open();
 }
