@@ -25,8 +25,8 @@ void Tracker::update(){
       ofxCvBlob blobClass = contourFinder.blobs[i];
       blob_data blob; /* = malloc(sizeof(blob_data)); */
 
-	  blob.x = blobClass.x;
-	  blob.y = blobClass.y;
+	  blob.x = blobClass.centroid.x;
+	  blob.y = blobClass.centroid.y;
 	  blob.bid = -1;
 
       // Looping through last frame's blobs to match these new ones
