@@ -23,8 +23,8 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	tracker->debugDraw();
 	kinect->debugDraw();
+	tracker->debugDraw();
 	network->debugDraw();
 	
 	ofSetColor(255, 255, 255);

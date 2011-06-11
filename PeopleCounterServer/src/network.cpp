@@ -1,16 +1,18 @@
 #include "network.h"
 
-void Network::setup(){
+void Network::setup(Analyzer * analyzeRef){
+	analyzer = analyzeRef;
+	
 	for(int i=0;i<3;i++){
-		oscReceiver[i].setup(2000+i);
-
 		clientConnected[i] = false;
 		clientTimeout[i] = 500;
 		clientReconnect[i] = 0;
 		clientPing[i] = 0;
 	}
 	
-	oscSender[0].setup("192.38.71.110", 1111);
+	//TCP[0].setup("192.38.71.110", 1111);
+	TCP[0].setup("localhost", 1111);
+	//TCP[0].setup("10.16.9.48", 1111);
 }
 
 
@@ -24,41 +26,32 @@ void Network::update(){
 			}
 		}
 	
-		//Receive messages that are waiting for us
-		while( oscReceiver[i].hasWaitingMessages() ){
-			clientTimeout[i] = 500;
-			clientConnected[i] = true;
-			
-			ofxOscMessage m;
-			oscReceiver[i].getNextMessage( &m );
-			
-			if ( m.getAddress() == "/ping" ){
+		//Send a message to the client
+		if(sendMessage(i)){
+			//Receive messages that are waiting for us
+			string recvstr = TCP[i].receive();
+			char * pch;
+			pch = strtok ((char*)recvstr.c_str(),";");
+			while (pch != NULL)
+			{
+				clientTimeout[i] = 500;
+				clientConnected[i] = true;
 
+				printf ("%s\n",pch);
+				
+				receiveMessage(pch, i);
+				pch = strtok (NULL, ";");
 			}
 		}
 		
 		
-		if(clientConnected[i]){
-			//Send a ping to te client with settings now and then
-			if(clientPing[i] < ofGetElapsedTimeMillis()){
-				clientPing[i] = ofGetElapsedTimeMillis() + 1000; 
-				
-				ofxOscMessage m;
-				m.setAddress("/ping");
-				oscSender[i].sendMessage( m );
-			}
-		} else {
+		if(!clientConnected[i]) {
 			//Try to reconnect now and then
-			if(clientReconnect[i] < ofGetElapsedTimeMillis()){
-				
+			if(clientReconnect[i] < ofGetElapsedTimeMillis()){				
 				cout<<"Trying to reconnect to client "<<i<<endl;
 				clientReconnect[i] = ofGetElapsedTimeMillis() + 2000; 
 
-				ofxOscMessage m;
-				m.setAddress("/connect");
-				m.addIntArg(i);
-				m.addStringArg("10.16.7.247");
-				oscSender[i].sendMessage( m );			
+				TCP[i].send("c"+ofToString(i,0));
 			}
 		}
 		
@@ -67,16 +60,26 @@ void Network::update(){
 
 
 void Network::debugDraw(){
-	/*if(serverConnected){
-		ofSetColor(255, 255, 255);
-		ofDrawBitmapString("Server connected",640+320, 260);
-	} else {
-		ofSetColor(255, 50, 50);
-		ofDrawBitmapString("Server not connected",640+320, 260);
-	}
-	
-	ofSetColor(255, 255, 255);
-	ofDrawBitmapString("My ID: "+ofToString(myId, 0),640+320, 280);
-*/
 }
 
+void Network::receiveMessage(string message, int client){
+	cout<<"Recv "<<message<<endl;
+	if(message.substr(0,1) == "b"){
+		analyzer->blobData[client].clear();
+	}
+	if(message.substr(0,1) == "i"){
+		bufferObject.bid = atoi(message.substr(1,message.length()-1).c_str());
+	}
+	if(message.substr(0,1) == "x"){
+		bufferObject.x = atoi(message.substr(1,message.length()-1).c_str());
+	}
+	if(message.substr(0,1) == "y"){
+		bufferObject.y = atoi(message.substr(1,message.length()-1).c_str());
+		analyzer->blobData[client].push_back(bufferObject);
+	}
+	
+}
+
+bool Network::sendMessage(int i){
+	TCP[i].send("ping");
+}

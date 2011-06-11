@@ -2,7 +2,7 @@
 
 
 #include "tracker.h"
-#include "ofxOsc.h"
+#include "ofxTCPServer.h"
 
 class Network {
 public:
@@ -12,10 +12,9 @@ public:
 	
 	Tracker * tracker;
 	
-	ofxOscSender oscSender;
-	ofxOscReceiver oscReceiver;
+	ofxTCPServer TCP;
 
-	void connectToServer();
+//	void connectToServer();
 	
 	bool serverConnected;
 	
@@ -23,4 +22,7 @@ public:
 	string serverIp;
 	
 	int timeout;
+	
+	void receiveMessage(string messsage);
+	void sendMessage(int client);
 };

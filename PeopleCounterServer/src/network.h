@@ -1,19 +1,21 @@
 #pragma once
 
+#include "ofMain.h"
+#include "ofxTCPClient.h"
 
-//#include "tracker.h"
-#include "ofxOsc.h"
+#include "analyzer.h"
 
 class Network {
 public:
-	void setup();
+	void setup(Analyzer * analyzer);
 	void update();
 	void debugDraw();
 	
 //	Tracker * tracker;
+	Analyzer * analyzer;
 	
-	ofxOscSender oscSender[3];
-	ofxOscReceiver oscReceiver[3];
+	ofxTCPClient TCP[3];
+
 
 	void connectToClient(int client);
 	
@@ -21,4 +23,9 @@ public:
 	int clientTimeout[3];
 	long clientReconnect[3];
 		long clientPing[3];
+	
+	void receiveMessage(string messsage, int client);
+	bool sendMessage(int client);
+
+	blob_data bufferObject;
 };

@@ -5,21 +5,25 @@ void testApp::setup(){
 	
 	gui = new Gui();
 	network = new Network();
+	analyzer = new Analyzer();
 	
 	gui->setup();
-	network->setup();
+	analyzer->setup();
+	network->setup(analyzer);
 
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 	gui->update();
+	analyzer->update();
 	network->update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 	gui->draw();
+	analyzer->debugDraw();
 	network->debugDraw();
 }
 

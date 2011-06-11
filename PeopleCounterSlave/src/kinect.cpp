@@ -14,5 +14,6 @@ void Kinect::update(){
 
 
 void Kinect::debugDraw(){
+	ofSetColor(255, 255, 255);
 	kinect.drawDepth(0,0,640,480);
 }
