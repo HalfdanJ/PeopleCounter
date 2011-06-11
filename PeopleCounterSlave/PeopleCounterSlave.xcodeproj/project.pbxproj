@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04823B5413A396040072B3F6 /* gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823B4E13A396040072B3F6 /* gui.cpp */; };
 		04823B5513A396040072B3F6 /* kinect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823B5013A396040072B3F6 /* kinect.cpp */; };
 		04823B5613A396040072B3F6 /* tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823B5213A396040072B3F6 /* tracker.cpp */; };
 		04823BE913A396160072B3F6 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04823B5D13A396160072B3F6 /* Color.cpp */; };
@@ -123,8 +122,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04823B4E13A396040072B3F6 /* gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gui.cpp; path = src/gui.cpp; sourceTree = SOURCE_ROOT; };
-		04823B4F13A396040072B3F6 /* gui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gui.h; path = src/gui.h; sourceTree = SOURCE_ROOT; };
 		04823B5013A396040072B3F6 /* kinect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kinect.cpp; path = src/kinect.cpp; sourceTree = SOURCE_ROOT; };
 		04823B5113A396040072B3F6 /* kinect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kinect.h; path = src/kinect.h; sourceTree = SOURCE_ROOT; };
 		04823B5213A396040072B3F6 /* tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tracker.cpp; path = src/tracker.cpp; sourceTree = SOURCE_ROOT; };
@@ -1211,8 +1208,6 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				04823B4E13A396040072B3F6 /* gui.cpp */,
-				04823B4F13A396040072B3F6 /* gui.h */,
 				04823B5013A396040072B3F6 /* kinect.cpp */,
 				04823B5113A396040072B3F6 /* kinect.h */,
 				04823B5213A396040072B3F6 /* tracker.cpp */,
@@ -1394,7 +1389,6 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
-				04823B5413A396040072B3F6 /* gui.cpp in Sources */,
 				04823B5513A396040072B3F6 /* kinect.cpp in Sources */,
 				04823B5613A396040072B3F6 /* tracker.cpp in Sources */,
 				04823BE913A396160072B3F6 /* Color.cpp in Sources */,
