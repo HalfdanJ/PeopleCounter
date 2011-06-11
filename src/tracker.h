@@ -7,7 +7,7 @@ struct blob_data {
 	int bid;
 	float x;
 	float y;
-}
+};
 
 class Tracker {
 public:
