@@ -856,8 +856,8 @@
 				04823D4C13A3A6A80072B3F6 /* testApp.h */,
 				04823E1A13A3A8830072B3F6 /* analyzer.h */,
 				04823E1B13A3A8830072B3F6 /* analyzer.cpp */,
-				DD98EF6313A3B0A30093BAAE /* network.cpp */,
 				DD98EF6413A3B0A30093BAAE /* network.h */,
+				DD98EF6313A3B0A30093BAAE /* network.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

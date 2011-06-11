@@ -17,7 +17,8 @@ public:
 
 	void connectToClient(int client);
 	
-	bool clientConnected[3];
-	
-	int timeout[3];
+	bool clientConnected[3];	
+	int clientTimeout[3];
+	long clientReconnect[3];
+		long clientPing[3];
 };

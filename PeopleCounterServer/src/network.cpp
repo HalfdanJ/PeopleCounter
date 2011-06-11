@@ -2,47 +2,72 @@
 
 void Network::setup(){
 	for(int i=0;i<3;i++){
-		oscReceiver.setup(2000+i);
-	}
+		oscReceiver[i].setup(2000+i);
 
-	serverConnected = false;
-	timeout = 500;
-	myId = -1;
+		clientConnected[i] = false;
+		clientTimeout[i] = 500;
+		clientReconnect[i] = 0;
+		clientPing[i] = 0;
+	}
+	
+	oscSender[0].setup("192.38.71.110", 1111);
 }
 
 
 void Network::update(){
-	if(serverConnected){
-		timeout --;
-		if(timeout < 0  ){
-			serverConnected = false;
-			cout<<"Server timed out"<<endl;
+	for(int i=0;i<1;i++){
+		if(clientConnected[i]){
+			clientTimeout[i] --;
+			if(clientTimeout[i] < 0  ){
+				clientConnected[i] = false;
+				cout<<"Client "<<i<<" timed out"<<endl;
+			}
 		}
-	}
-	while( oscReceiver.hasWaitingMessages() ){
-		timeout = 500;
-		
-		ofxOscMessage m;
-		oscReceiver.getNextMessage( &m );
-		
-		if ( m.getAddress() == "/connect" ){
-			myId = m.getArgAsInt32(0);
-			connectToServer();
-		}
-	}
-
 	
-	if(serverConnected){
-		//If server is connected, lets send some data
-		ofxOscMessage m;
-		m.setAddress("/ping");
-		oscSender.sendMessage( m );
+		//Receive messages that are waiting for us
+		while( oscReceiver[i].hasWaitingMessages() ){
+			clientTimeout[i] = 500;
+			clientConnected[i] = true;
+			
+			ofxOscMessage m;
+			oscReceiver[i].getNextMessage( &m );
+			
+			if ( m.getAddress() == "/ping" ){
+
+			}
+		}
+		
+		
+		if(clientConnected[i]){
+			//Send a ping to te client with settings now and then
+			if(clientPing[i] < ofGetElapsedTimeMillis()){
+				clientPing[i] = ofGetElapsedTimeMillis() + 1000; 
+				
+				ofxOscMessage m;
+				m.setAddress("/ping");
+				oscSender[i].sendMessage( m );
+			}
+		} else {
+			//Try to reconnect now and then
+			if(clientReconnect[i] < ofGetElapsedTimeMillis()){
+				
+				cout<<"Trying to reconnect to client "<<i<<endl;
+				clientReconnect[i] = ofGetElapsedTimeMillis() + 2000; 
+
+				ofxOscMessage m;
+				m.setAddress("/connect");
+				m.addIntArg(i);
+				m.addStringArg("10.16.7.247");
+				oscSender[i].sendMessage( m );			
+			}
+		}
+		
 	}
 }
 
 
 void Network::debugDraw(){
-	if(serverConnected){
+	/*if(serverConnected){
 		ofSetColor(255, 255, 255);
 		ofDrawBitmapString("Server connected",640+320, 260);
 	} else {
@@ -52,16 +77,6 @@ void Network::debugDraw(){
 	
 	ofSetColor(255, 255, 255);
 	ofDrawBitmapString("My ID: "+ofToString(myId, 0),640+320, 280);
-
+*/
 }
 
-
-void Network::connectToServer(){
-	if(!serverConnected){
-		serverConnected = true;
-		oscSender.setup("localhost",2000+myId);
-	} else {
-		cout<<"Server already connected"<<endl;
-	}
-	
-}

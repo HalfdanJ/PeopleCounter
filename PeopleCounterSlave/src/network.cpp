@@ -27,6 +27,7 @@ void Network::update(){
 		
 		if ( m.getAddress() == "/connect" ){
 			myId = m.getArgAsInt32(0);
+			serverIp = m.getArgAsString(1);
 			connectToServer();
 		}
 	}
@@ -51,7 +52,8 @@ void Network::debugDraw(){
 	}
 	
 	ofSetColor(255, 255, 255);
-	ofDrawBitmapString("My ID: "+ofToString(myId, 0),640+320, 280);
+	ofDrawBitmapString("My id: "+ofToString(myId, 0),640+320, 280);
+	ofDrawBitmapString("Server ip: "+serverIp,640+320, 290);
 
 }
 
@@ -59,7 +61,7 @@ void Network::debugDraw(){
 void Network::connectToServer(){
 	if(!serverConnected){
 		serverConnected = true;
-		oscSender.setup("localhost",2000+myId);
+		oscSender.setup(serverIp,2000+myId);
 	} else {
 		cout<<"Server already connected"<<endl;
 	}

@@ -20,6 +20,7 @@ public:
 	bool serverConnected;
 	
 	int myId;
-
+	string serverIp;
+	
 	int timeout;
 };
