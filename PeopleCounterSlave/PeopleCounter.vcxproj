@@ -130,7 +130,6 @@ xcopy /e /i /y "$(ProjectDir)..\..\..\addons\ofxKinect\libs\libfreenect\lib\vs20
     <ClCompile Include="addons\ofxKinect\src\ofxKinectCalibration.cpp" />
     <ClCompile Include="addons\ofxKinect\src\ofxKinectPlayer.cpp" />
     <ClCompile Include="addons\ofxKinect\src\ofxKinectRecorder.cpp" />
-    <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\kinect.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\testApp.cpp" />
@@ -163,7 +162,6 @@ xcopy /e /i /y "$(ProjectDir)..\..\..\addons\ofxKinect\libs\libfreenect\lib\vs20
     <ClInclude Include="addons\ofxKinect\src\ofxKinectCalibration.h" />
     <ClInclude Include="addons\ofxKinect\src\ofxKinectPlayer.h" />
     <ClInclude Include="addons\ofxKinect\src\ofxKinectRecorder.h" />
-    <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\kinect.h" />
     <ClInclude Include="src\testApp.h" />
     <ClInclude Include="src\tracker.h" />
