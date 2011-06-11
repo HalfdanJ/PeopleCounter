@@ -4,11 +4,9 @@
 void testApp::setup(){
 	kinect = new Kinect();
 	tracker = new Tracker();
-	gui = new Gui();
 	
 	kinect->setup();
 	tracker->setup(kinect);
-	gui->setup(kinect, tracker);
 	
 }
 
@@ -16,20 +14,16 @@ void testApp::setup(){
 void testApp::update(){
 	kinect->update();
 	tracker->update();
-	gui->update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	gui->draw();
-	
 	tracker->debugDraw();
 	kinect->debugDraw();
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-	gui->keyPressed(key);
 }
 
 //--------------------------------------------------------------

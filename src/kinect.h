@@ -8,5 +8,5 @@ public:
 	void update();
 	void debugDraw();
 	
-	ofxKinect kinect[2];
+	ofxKinect kinect;
 };

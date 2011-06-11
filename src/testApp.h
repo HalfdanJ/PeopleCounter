@@ -6,7 +6,6 @@
 
 #include "kinect.h"
 #include "tracker.h"
-#include "gui.h"
 
 class testApp : public ofBaseApp{
 
@@ -17,7 +16,6 @@ class testApp : public ofBaseApp{
 	
 	Kinect * kinect;
 	Tracker * tracker;
-	Gui * gui;
 		
 
 		void keyPressed  (int key);

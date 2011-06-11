@@ -452,7 +452,7 @@ void ofxKinect::threadedFunction(){
 	}
 	
 	while(isThreadRunning()){
-	/*	if(bTiltNeedsApplying){
+		if(bTiltNeedsApplying){
 			freenect_set_tilt_degs(kinectDevice, targetTiltAngleDeg);
 			bTiltNeedsApplying = false;
 		}
@@ -465,7 +465,7 @@ void ofxKinect::threadedFunction(){
 		double dx,dy,dz;
 		freenect_get_mks_accel(tilt, &dx, &dy, &dz);
 		mksAccel.set(dx, dy, dz);
-		*/
+		
 		ofSleepMillis(10);
 
 //		printf("\r raw acceleration: %4d %4d %4d  mks acceleration: %4f %4f %4f", ax, ay, az, dx, dy, dz);
