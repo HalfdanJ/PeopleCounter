@@ -84,6 +84,8 @@ void Network::sendMessage(int client){
 		send += "i"+ofToString(tracker->blobData[i].bid,0)+";";
 		send += "x"+ofToString(tracker->blobData[i].x,0)+";";
 		send += "y"+ofToString(tracker->blobData[i].y,0)+";";
+		send += "w"+ofToString(tracker->blobData[i].w,0)+";";
+		send += "h"+ofToString(tracker->blobData[i].h,0)+";";
 	}
 	TCP.send(client,send);
 }
