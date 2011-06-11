@@ -8,6 +8,8 @@ void Network::setup(Tracker* trackerRef){
 	serverConnected = false;
 	timeout = 500;
 	myId = -1;
+    
+    tracker->kinect->kinect.setLedStatus(LED_RED);
 }
 
 
@@ -17,6 +19,8 @@ void Network::update(){
 		if(timeout < 0  ){
 			serverConnected = false;
 			cout<<"Server timed out"<<endl;
+            
+            tracker->kinect->kinect.setLedStatus(LED_RED);
 		}
 	}
 	
@@ -61,6 +65,8 @@ void Network::receiveMessage(string message){
 	if(message.substr(0,1) == "c"){
 		myId = atoi(message.substr(1,1).c_str());
 		serverConnected = true;
+        tracker->kinect->kinect.setLedStatus(LED_BLINK_GREEN);
+
 	}
 	if(message.substr(0,1) == "t"){
 		tracker->threshold = atoi(message.substr(1,message.length()-1).c_str());

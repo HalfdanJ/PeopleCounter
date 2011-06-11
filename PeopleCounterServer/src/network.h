@@ -5,6 +5,8 @@
 
 #include "analyzer.h"
 #include "gui.h"
+#include "defines.h"
+
 
 class Network {
 public:
@@ -16,15 +18,15 @@ public:
 	Analyzer * analyzer;
 	Gui * gui;
 	
-	ofxTCPClient TCP[3];
+	ofxTCPClient TCP[NUM_CLIENTS];
 
 
 	void connectToClient(int client);
 	
-	bool clientConnected[3];	
-	int clientTimeout[3];
-	long clientReconnect[3];
-		long clientPing[3];
+	bool clientConnected[NUM_CLIENTS];	
+	int clientTimeout[NUM_CLIENTS];
+	long clientReconnect[NUM_CLIENTS];
+		long clientPing[NUM_CLIENTS];
 	
 	void receiveMessage(string messsage, int client);
 	bool sendMessage(int client);

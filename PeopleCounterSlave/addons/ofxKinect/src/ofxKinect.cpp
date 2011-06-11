@@ -33,6 +33,9 @@ ofxKinect::ofxKinect()
 	
 	targetTiltAngleDeg		= 0;
 	bTiltNeedsApplying		= false;
+    
+    targetLedStatus         = LED_GREEN;
+    bLedNeedsApplying       = false;
 
 	//thisKinect = this;
 }
@@ -160,6 +163,18 @@ bool ofxKinect::setCameraTiltAngle(float angleInDegrees){
 	bTiltNeedsApplying = true;
 
 	return true;
+}
+
+//--------------------------------------------------------------------
+bool ofxKinect::setLedStatus(freenect_led_options led){
+	if(!bGrabberInited){
+		return false;
+	}
+    
+	targetLedStatus = led;
+	bLedNeedsApplying = true;
+    
+	return true;   
 }
 
 //--------------------------------------------------------------------
@@ -456,6 +471,10 @@ void ofxKinect::threadedFunction(){
 			freenect_set_tilt_degs(kinectDevice, targetTiltAngleDeg);
 			bTiltNeedsApplying = false;
 		}
+        if(bLedNeedsApplying){
+            freenect_set_led(kinectDevice, targetLedStatus);
+            bLedNeedsApplying = false;
+        }
 
 		freenect_update_tilt_state(kinectDevice);
 		freenect_raw_tilt_state * tilt = freenect_get_tilt_state(kinectDevice);

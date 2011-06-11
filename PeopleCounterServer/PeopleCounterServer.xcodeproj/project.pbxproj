@@ -254,6 +254,7 @@
 		DD41B82513A40FC100D3E5E3 /* ofxThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxThread.h; sourceTree = "<group>"; };
 		DD98EF6313A3B0A30093BAAE /* network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = network.cpp; path = src/network.cpp; sourceTree = SOURCE_ROOT; };
 		DD98EF6413A3B0A30093BAAE /* network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = network.h; path = src/network.h; sourceTree = SOURCE_ROOT; };
+		DDA2622F13A419420086FCB4 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 		E45BE0390E8CC647009D7055 /* FreeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreeImage.h; path = ../../../libs/freeimage/include/FreeImage.h; sourceTree = SOURCE_ROOT; };
 		E45BE03F0E8CC650009D7055 /* fmod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fmod.h; path = ../../../libs/fmodex/include/fmod.h; sourceTree = SOURCE_ROOT; };
 		E45BE0400E8CC650009D7055 /* fmod.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fmod.hpp; path = ../../../libs/fmodex/include/fmod.hpp; sourceTree = SOURCE_ROOT; };
@@ -910,17 +911,18 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				04823D4613A3A6A80072B3F6 /* gui.cpp */,
-				04823D4713A3A6A80072B3F6 /* gui.h */,
 				04823D4813A3A6A80072B3F6 /* main.cpp */,
-				04823D4913A3A6A80072B3F6 /* synth.cpp */,
-				04823D4A13A3A6A80072B3F6 /* synth.h */,
 				04823D4B13A3A6A80072B3F6 /* testApp.cpp */,
 				04823D4C13A3A6A80072B3F6 /* testApp.h */,
+				04823D4613A3A6A80072B3F6 /* gui.cpp */,
+				04823D4713A3A6A80072B3F6 /* gui.h */,
 				04823E1A13A3A8830072B3F6 /* analyzer.h */,
 				04823E1B13A3A8830072B3F6 /* analyzer.cpp */,
 				DD98EF6413A3B0A30093BAAE /* network.h */,
 				DD98EF6313A3B0A30093BAAE /* network.cpp */,
+				04823D4913A3A6A80072B3F6 /* synth.cpp */,
+				04823D4A13A3A6A80072B3F6 /* synth.h */,
+				DDA2622F13A419420086FCB4 /* defines.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

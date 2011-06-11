@@ -1,4 +1,5 @@
 #pragma once
+#include "defines.h"
 
 //#include "ofxSpeech.h"
 using namespace std;
