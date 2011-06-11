@@ -44,8 +44,6 @@ void Network::update(){
 			{
 				clientTimeout[i] = 500;
 				clientConnected[i] = true;
-
-				printf ("%s\n",pch);
 				
 				receiveMessage(pch, i);
 				pch = strtok (NULL, ";");
