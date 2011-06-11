@@ -4,22 +4,31 @@
 void testApp::setup(){
 	kinect = new Kinect();
 	tracker = new Tracker();
+	network = new Network();
 	
 	kinect->setup();
 	tracker->setup(kinect);
+	network->setup(tracker);	
 	
+	ofBackground(100, 100, 100);
+	ofSetFrameRate(60);
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 	kinect->update();
 	tracker->update();
+	network->update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 	tracker->debugDraw();
 	kinect->debugDraw();
+	network->debugDraw();
+	
+	ofSetColor(255, 255, 255);
+	ofDrawBitmapString("Framerate: "+ofToString(ofGetFrameRate(), 1), 650, 260);
 }
 
 //--------------------------------------------------------------
