@@ -92,7 +92,7 @@ void Network::debugDraw(){
 }
 
 void Network::receiveMessage(string message, int client){
-	cout<<"Recv "<<message<<endl;
+//	cout<<"Recv "<<message<<endl;
 	if(message.substr(0,1) == "b"){
 		analyzer->blobData[client].clear();
 	}
