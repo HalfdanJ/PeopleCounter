@@ -1,15 +1,17 @@
-#ifndef _TEST_APP
-#define _TEST_APP
-
+#pragma once
 
 #include "ofMain.h"
+#include "analyzer.h"
+#include "gui.h"
 
-class testApp : public ofBaseApp{
+class peopleCounterServerApp : public ofBaseApp{
 
 	public:
 		void setup();
 		void update();
 		void draw();
+		
+	Gui * gui;
 
 		void keyPressed  (int key);
 		void keyReleased(int key);
@@ -20,5 +22,3 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 
 };
-
-#endif

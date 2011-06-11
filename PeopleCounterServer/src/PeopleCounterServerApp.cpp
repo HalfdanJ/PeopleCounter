@@ -1,52 +1,56 @@
-#include "testApp.h"
+#include "peopleCounterServerApp.h"
 
 //--------------------------------------------------------------
-void testApp::setup(){
+void peopleCounterServerApp::setup(){
+	gui = new Gui();
+	
+	gui->setup();
 
 }
 
 //--------------------------------------------------------------
-void testApp::update(){
+void peopleCounterServerApp::update(){
+	gui->update();
+}
+
+//--------------------------------------------------------------
+void peopleCounterServerApp::draw(){
+	gui->draw();
 
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
+void peopleCounterServerApp::keyPressed(int key){
 
 }
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key){
+void peopleCounterServerApp::keyReleased(int key){
 
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key){
+void peopleCounterServerApp::mouseMoved(int x, int y ){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
+void peopleCounterServerApp::mouseDragged(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
+void peopleCounterServerApp::mousePressed(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
+void peopleCounterServerApp::mouseReleased(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
+void peopleCounterServerApp::windowResized(int w, int h){
 
 }
 
