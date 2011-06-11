@@ -1,7 +1,8 @@
 #include "network.h"
 
-void Network::setup(Analyzer * analyzeRef){
+void Network::setup(Analyzer * analyzeRef, Gui * guiRef){
 	analyzer = analyzeRef;
+	gui = guiRef; 
 	
 	for(int i=0;i<3;i++){
 		clientConnected[i] = false;
@@ -12,11 +13,15 @@ void Network::setup(Analyzer * analyzeRef){
 	
 	//TCP[0].setup("192.38.71.110", 1111);
 	TCP[0].setup("localhost", 1111);
-	//TCP[0].setup("10.16.9.48", 1111);
+//	TCP[0].setup("10.16.9.48", 1111);
+	sendTimer = 0;
 }
 
 
 void Network::update(){
+	sendTimer--;
+	
+	
 	for(int i=0;i<1;i++){
 		if(clientConnected[i]){
 			clientTimeout[i] --;
@@ -25,9 +30,11 @@ void Network::update(){
 				cout<<"Client "<<i<<" timed out"<<endl;
 			}
 		}
-	
+		
 		//Send a message to the client
-		if(sendMessage(i)){
+		if(sendTimer < ofGetElapsedTimeMillis() && sendMessage(i)){
+			sendTimer = ofGetElapsedTimeMillis()+50;
+			
 			//Receive messages that are waiting for us
 			string recvstr = TCP[i].receive();
 			char * pch;
@@ -81,5 +88,8 @@ void Network::receiveMessage(string message, int client){
 }
 
 bool Network::sendMessage(int i){
-	TCP[i].send("ping");
+	string send;
+	send += "t"+ofToString(gui->depthThreshold, 0)+";";
+	send += "b"+ofToString(gui->blur, 0)+";";
+	return TCP[i].send(send);
 }

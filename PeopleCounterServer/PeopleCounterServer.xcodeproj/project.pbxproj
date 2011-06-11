@@ -684,8 +684,8 @@
 				DD98F00813A3CCCD0093BAAE /* src */,
 			);
 			name = ofxNetwork;
-			path = Udvikling/of_preRelease_v0062_osxSL_FAT/addons/ofxNetwork;
-			sourceTree = SYSTEM_DEVELOPER_DIR;
+			path = ../../../addons/ofxNetwork;
+			sourceTree = SOURCE_ROOT;
 		};
 		DD98F00513A3CCCD0093BAAE /* docs */ = {
 			isa = PBXGroup;
@@ -720,8 +720,8 @@
 				DD98F0A513A3D4DB0093BAAE /* src */,
 			);
 			name = ofxThread;
-			path = Udvikling/of_preRelease_v0062_osxSL_FAT/addons/ofxThread;
-			sourceTree = SYSTEM_DEVELOPER_DIR;
+			path = ../../../addons/ofxThread;
+			sourceTree = SOURCE_ROOT;
 		};
 		DD98F0A513A3D4DB0093BAAE /* src */ = {
 			isa = PBXGroup;

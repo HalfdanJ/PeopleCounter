@@ -24,5 +24,5 @@ public:
 	int timeout;
 	
 	void receiveMessage(string messsage);
-	void sendMessage(int client);
+	void sendMessage(int i);
 };

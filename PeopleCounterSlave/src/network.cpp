@@ -22,17 +22,20 @@ void Network::update(){
 	
 	
 	for(int i = 0; i < TCP.getNumClients(); i++){		
+		bool gotMsg = false;
 		string recvstr = TCP.receive(i);
 		char * pch;
 		pch = strtok ((char*)recvstr.c_str(),";");
 		while (pch != NULL)
 		{
+			gotMsg = true;
 			timeout = 500;
 			receiveMessage(pch);
 			pch = strtok (NULL, ";");
 		}
-		
-		sendMessage(i);
+		if(gotMsg){
+			sendMessage(i);
+		}
 	}
 }
 
@@ -59,9 +62,16 @@ void Network::receiveMessage(string message){
 		myId = atoi(message.substr(1,1).c_str());
 		serverConnected = true;
 	}
+	if(message.substr(0,1) == "t"){
+		tracker->threshold = atoi(message.substr(1,message.length()-1).c_str());
+	}
+	if(message.substr(0,1) == "b"){
+		tracker->blur = atoi(message.substr(1,message.length()-1).c_str());
+	}
+	
 }
 
-void Network::sendMessage(int i){
+void Network::sendMessage(int client){
 	string send;
 	send += "b;";
 	for(int i=0;i<tracker->blobData.size();i++){
@@ -69,7 +79,7 @@ void Network::sendMessage(int i){
 		send += "x"+ofToString(tracker->blobData[i].x,0)+";";
 		send += "y"+ofToString(tracker->blobData[i].y,0)+";";
 	}
-	TCP.send(i,send);
+	TCP.send(client,send);
 }
 
 

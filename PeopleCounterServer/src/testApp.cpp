@@ -9,7 +9,7 @@ void testApp::setup(){
 	
 	gui->setup();
 	analyzer->setup();
-	network->setup(analyzer);
+	network->setup(analyzer, gui);
 
 }
 
