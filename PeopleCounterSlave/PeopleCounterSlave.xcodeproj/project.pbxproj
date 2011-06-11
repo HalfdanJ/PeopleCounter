@@ -814,8 +814,8 @@
 				DD98EEDE13A3AADF0093BAAE /* src */,
 			);
 			name = ofxOsc;
-			path = Udvikling/of_preRelease_v0062_osxSL_FAT/addons/ofxOsc;
-			sourceTree = SYSTEM_DEVELOPER_DIR;
+			path = ../../../addons/ofxOsc;
+			sourceTree = SOURCE_ROOT;
 		};
 		DD98EEC913A3AADF0093BAAE /* libs */ = {
 			isa = PBXGroup;
