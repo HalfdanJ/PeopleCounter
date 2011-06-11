@@ -6,6 +6,9 @@ unsigned char * 	videoInverted;
 ofTexture			videoTexture;
 
 void Gui::setup(){	
+	
+	depthThreshold = 50;
+	
 	ofBackground(0, 0, 0);
 	ofSetVerticalSync(true);
 	
@@ -24,9 +27,6 @@ void Gui::setup(){
 	gui.addSlider("id", slave2id, 0, 10);
 	gui.addTitle("Slave 3");
 	gui.addSlider("id", slave3id, 0, 10);
-	
-	
-	
 	
 	//gui.addColorPicker("BG Color", &aColor.r);
 	//gui.addComboBox("box1", box1, 12, NULL);
