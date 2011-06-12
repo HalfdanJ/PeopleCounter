@@ -6,11 +6,14 @@ void Analyzer::setup(Gui * guiRef){
 	count = 0;
     
     onePersonArea = 40000;
+    addedCount = 0;
 }
 
 int combined_id;
 
 void Analyzer::update(){
+    addedCount = 0;
+    
     if(gui->addPerson) {
 		gui->addPerson = false;
 		count += 1;
@@ -20,7 +23,6 @@ void Analyzer::update(){
         combinedBlobs[u].foundInThisFrame = false;
     }
     
-    //combinedBlobs.clear();
     for(int client=0;client<NUM_CLIENTS;client++){
         for(int i=0;i<blobData[client].size();i++){
             //Go through all new data
@@ -104,14 +106,15 @@ void Analyzer::update(){
     for(int i=0;i<combinedBlobs.size();i++){
         if(!combinedBlobs[i].isCounted){
             //If the blob is older then 1 sec
-            if(combinedBlobs[i].birth < ofGetElapsedTimeMillis() - 1000){
+            if(combinedBlobs[i].birth < ofGetElapsedTimeMillis() - 500){
                 //The distance the blob has gone
-                if(fabs(combinedBlobs[i].birthY - combinedBlobs[i].y) > 100){
+                if(fabs(combinedBlobs[i].birthY - combinedBlobs[i].y) > 80){
                     combinedBlobs[i].isCounted = true;
                     int persons = floor((combinedBlobs[i].w*combinedBlobs[i].h) / onePersonArea);
                     if(persons < 1)
                         persons = 1;
                     count+=persons;
+                    addedCount += persons;
                 }
             }
         }

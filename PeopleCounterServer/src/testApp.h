@@ -5,6 +5,7 @@
 #include "gui.h"
 #include "network.h"
 #include "synth.h"
+#include "filesaver.h"
 #include "defines.h"
 
 class testApp : public ofBaseApp{
@@ -17,7 +18,8 @@ class testApp : public ofBaseApp{
 	Gui * gui;
 	Network * network;
 	Analyzer * analyzer;
-	Synth * synth;
+    Synth * synth;
+    Filesaver * filesaver;
 
 		void keyPressed  (int key);
 		void keyReleased(int key);

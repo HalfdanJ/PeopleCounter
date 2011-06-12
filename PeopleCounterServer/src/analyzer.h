@@ -31,12 +31,14 @@ public:
 	void debugDraw();
 	
     Gui * gui;
+    
 	vector< blob_data > blobData[NUM_CLIENTS];
     
     void markNewFrame(int client);
     void addBlobData(blob_data newData, int client);
     
     int count;
+    int addedCount;
     
     int currentCount;
     

@@ -7,9 +7,11 @@ void testApp::setup(){
 	network = new Network();
 	analyzer = new Analyzer();
 	synth = new Synth();
+    filesaver = new Filesaver();
 	
 	gui->setup();
 	analyzer->setup(gui);
+    filesaver->setup(analyzer);
 	network->setup(analyzer, gui);
 	synth->setup(analyzer, gui);
 
@@ -20,6 +22,7 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
 	gui->update();
+    filesaver->update();
 	analyzer->update();
 	network->update();
 	synth->update();
@@ -30,6 +33,7 @@ void testApp::draw(){
 	gui->draw();
 	analyzer->debugDraw();
 	network->debugDraw();
+    filesaver->debugDraw();
 }
 
 //--------------------------------------------------------------
