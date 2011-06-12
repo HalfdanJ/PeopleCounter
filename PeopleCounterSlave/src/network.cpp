@@ -90,6 +90,14 @@ void Network::receiveMessage(string message){
 	if(message.substr(0,1) == "B"){
 		tracker->bottomCrop = atoi(message.substr(1,message.length()-1).c_str());
 	}
+	
+	if(message.substr(0,1) == "m"){
+		tracker->minSize = atoi(message.substr(1,message.length()-1).c_str());
+	}
+	if(message.substr(0,1) == "M"){
+		tracker->maxSize = atoi(message.substr(1,message.length()-1).c_str());
+	}
+	
 }
 
 void Network::sendMessage(int client){
