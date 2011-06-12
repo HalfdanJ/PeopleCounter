@@ -24,7 +24,13 @@ public:
 	int		slave2id;
 	int		slave3id;
 	
-    int clientOffset[NUM_CLIENTS];
-
-	
+    int clientOffsetX[NUM_CLIENTS];
+    int clientOffsetY[NUM_CLIENTS];
+    
+    int leftCrop[NUM_CLIENTS];
+    int rightCrop[NUM_CLIENTS];
+    int topCrop;
+    int bottomCrop;
+    
+    float analyzerMergeDist;
 };
