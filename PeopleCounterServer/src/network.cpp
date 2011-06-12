@@ -11,10 +11,10 @@ void Network::setup(Analyzer * analyzeRef, Gui * guiRef){
 		clientPing[i] = 0;
 	}
 	
-//	TCP[0].setup("halfdanjmacbook.local", 1111);
-   TCP[0].setup("192.38.71.110", 1111);
-    TCP[1].setup("192.38.71.161", 1111);
-
+	//TCP[0].setup("halfdanjmacbook.local", 1111);
+    TCP[0].setup("192.38.71.110", 1111);
+    TCP[1].setup("192.38.71.154", 1111);
+    TCP[2].setup("192.38.71.161", 1111);
 //	TCP[0].setup("localhost", 1111);
 //    	TCP[0].setup("halfdanjmacbook.local", 1111);
 //	TCP[0].setup("10.16.9.48", 1111);
