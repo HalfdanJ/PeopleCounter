@@ -69,6 +69,8 @@ void Analyzer::debugDraw(){
 	
 }
 
+
+
 //Is called by network when new data is incomming. 
 //Here we delete blobs that where not present in the last frame
 void Analyzer::markNewFrame(int client){

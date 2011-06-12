@@ -33,5 +33,5 @@ public:
     void markNewFrame(int client);
     void addBlobData(blob_data newData, int client);
     
-
+    int count;
 };
