@@ -57,6 +57,7 @@
     <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp">
       <Filter>addons\ofxNetwork\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\gpc.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\testApp.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.h">
       <Filter>addons\ofxNetwork\src</Filter>
     </ClInclude>
+    <ClInclude Include="src\gpc.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="addons">

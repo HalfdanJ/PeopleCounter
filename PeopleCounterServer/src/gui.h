@@ -12,11 +12,23 @@ public:
 		
 	// analyzer
 	int		depthThreshold;
-	int		blur;	
 	bool	addPerson;
-	
+    float   analyzerMergeDist;    
+
+    //Client
+	int		blur;	
+    int     minBlobSize;
+    int     maxBlobSize;
+
 	// network
-    int clientOffset[NUM_CLIENTS];
+    int clientOffsetX[NUM_CLIENTS];
+    int clientOffsetY[NUM_CLIENTS];
+    
+    int leftCrop[NUM_CLIENTS];
+    int rightCrop[NUM_CLIENTS];
+    int topCrop;
+    int bottomCrop;
+    
 
 	// synth 
 	bool playAudio;

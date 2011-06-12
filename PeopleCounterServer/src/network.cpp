@@ -11,7 +11,8 @@ void Network::setup(Analyzer * analyzeRef, Gui * guiRef){
 		clientPing[i] = 0;
 	}
 	
-	TCP[0].setup("192.38.71.154", 1111);
+//	TCP[0].setup("halfdanjmacbook.local", 1111);
+   TCP[0].setup("192.38.71.110", 1111);
     TCP[1].setup("192.38.71.161", 1111);
 
 //	TCP[0].setup("localhost", 1111);
@@ -122,5 +123,11 @@ bool Network::sendMessage(int i){
 	string send;
 	send += "t"+ofToString(gui->depthThreshold, 0)+";";
 	send += "b"+ofToString(gui->blur, 0)+";";
+    send += "T"+ofToString(gui->topCrop-gui->clientOffsetY[i], 0)+";";
+    send += "B"+ofToString(gui->bottomCrop+gui->clientOffsetY[i], 0)+";";    
+    send += "L"+ofToString(gui->leftCrop[i], 0)+";";
+    send += "R"+ofToString(gui->rightCrop[i], 0)+";";    
+    send += "m"+ofToString(gui->minBlobSize, 0)+";";    
+    send += "M"+ofToString(gui->maxBlobSize, 0)+";";    
 	return TCP[i].send(send);
 }

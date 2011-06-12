@@ -9,6 +9,8 @@ struct blob_data {
 	float y;
 	float w;
 	float h;
+	ofxCvBlob cvBlob;
+	float blobDiff;
 };
 
 class Tracker {
@@ -36,6 +38,8 @@ public:
 	vector<blob_data> blobData;
 
 	int next_id;
+	
+	float minSize, maxSize;
 
 	void crop();
 private:

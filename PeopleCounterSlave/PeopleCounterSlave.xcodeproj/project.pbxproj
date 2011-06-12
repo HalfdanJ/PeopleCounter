@@ -34,6 +34,7 @@
 		DD3D3AC513A41FF3007AB16F /* ofxTCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3D3ABF13A41FF3007AB16F /* ofxTCPServer.cpp */; };
 		DD3D3AC613A41FF3007AB16F /* ofxUDPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3D3AC113A41FF3007AB16F /* ofxUDPManager.cpp */; };
 		DD98EE8F13A3A7830093BAAE /* network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD98EE8E13A3A7830093BAAE /* network.cpp */; };
+		DDE006EF13A521540003825C /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = DDE006ED13A521540003825C /* gpc.c */; };
 		E45BE0AA0E8CC67C009D7055 /* GLee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE0A90E8CC67C009D7055 /* GLee.a */; };
 		E45BE2E40E8CC69C009D7055 /* rtAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE2E30E8CC69C009D7055 /* rtAudio.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -225,6 +226,8 @@
 		DD3D3AC213A41FF3007AB16F /* ofxUDPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUDPManager.h; sourceTree = "<group>"; };
 		DD98EE8D13A3A7830093BAAE /* network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = network.h; path = src/network.h; sourceTree = SOURCE_ROOT; };
 		DD98EE8E13A3A7830093BAAE /* network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = network.cpp; path = src/network.cpp; sourceTree = SOURCE_ROOT; };
+		DDE006ED13A521540003825C /* gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpc.c; sourceTree = "<group>"; };
+		DDE006EE13A521540003825C /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
 		E45BE0390E8CC647009D7055 /* FreeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreeImage.h; path = ../../../libs/freeimage/include/FreeImage.h; sourceTree = SOURCE_ROOT; };
 		E45BE03F0E8CC650009D7055 /* fmod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fmod.h; path = ../../../libs/fmodex/include/fmod.h; sourceTree = SOURCE_ROOT; };
 		E45BE0400E8CC650009D7055 /* fmod.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fmod.hpp; path = ../../../libs/fmodex/include/fmod.hpp; sourceTree = SOURCE_ROOT; };
@@ -1019,6 +1022,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				DDE006ED13A521540003825C /* gpc.c */,
+				DDE006EE13A521540003825C /* gpc.h */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				04823B5113A396040072B3F6 /* kinect.h */,
@@ -1227,6 +1232,7 @@
 				DD3D3AC413A41FF3007AB16F /* ofxTCPManager.cpp in Sources */,
 				DD3D3AC513A41FF3007AB16F /* ofxTCPServer.cpp in Sources */,
 				DD3D3AC613A41FF3007AB16F /* ofxUDPManager.cpp in Sources */,
+				DDE006EF13A521540003825C /* gpc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
