@@ -6,6 +6,18 @@
 #include "ofxSpeech.h"
 #include "defines.h"
 
+struct msg {
+	string str;
+	int priority;
+	string voice;
+	int rate;
+	int pitch;
+};
+
+#define LOW_ACTIVITY 0.9
+#define NORMAL_ACTIVITY 2
+#define HIGH_ACTIVITY 4
+
 class Synth {
 public:
 	
@@ -14,21 +26,35 @@ public:
 	
 	void setup(Analyzer * analyzer, Gui * gui);
 	void update();
-	void say(string msg, string voice);
+	void debugDraw();
 	
-	map< string, int > voices;
+	void addMsg(string msg, string voice, int priority = 0, int rate = -1, int pitch = -1);
+	void say(string msg, string voice, int rate = -1, int pitch = -1);
 	
-	float lastMsgTime;
+	vector< string > voices;
+	vector< string > msgPrefix;
+	vector< string > msgAttrib;
+	vector< string > msgSuffix;
 	
-	int shortmsgtime;
-	int longmsgtime;
+	vector< msg > queue;
 	
+	float lastSpecialMsgTime;
+	
+	float specialMsgTimeDelta;
+	
+	string voice;
 	string message;
+	
+	int maxActivity;
 	
 	int count;
 	int diff;
-	
+		
 	ofxSpeechSynthesizer    synth;
+	
+	
+	float activityBar;
+	//void speechDone();
 };
 
 

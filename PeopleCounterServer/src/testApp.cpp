@@ -34,6 +34,7 @@ void testApp::draw(){
 	analyzer->debugDraw();
 	network->debugDraw();
     filesaver->debugDraw();
+	synth->debugDraw();
 }
 
 //--------------------------------------------------------------

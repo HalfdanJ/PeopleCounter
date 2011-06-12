@@ -60,6 +60,8 @@ void Gui::update(){
 
 void Gui::draw(){
 	gui.draw();
+	
+	
 }
 
 void Gui::keyPressed (int key){ 
