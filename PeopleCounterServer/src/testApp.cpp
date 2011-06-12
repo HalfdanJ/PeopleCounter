@@ -6,10 +6,12 @@ void testApp::setup(){
 	gui = new Gui();
 	network = new Network();
 	analyzer = new Analyzer();
+	synth = new Synth();
 	
 	gui->setup();
 	analyzer->setup(gui);
 	network->setup(analyzer, gui);
+	synth->setup(analyzer, gui);
 
     ofBackground(0,0,0);
     ofSetFrameRate(30);
@@ -20,6 +22,7 @@ void testApp::update(){
 	gui->update();
 	analyzer->update();
 	network->update();
+	synth->update();
 }
 
 //--------------------------------------------------------------

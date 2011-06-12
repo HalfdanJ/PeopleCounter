@@ -2,11 +2,16 @@
 
 void Analyzer::setup(Gui * guiRef){
     gui = guiRef;
+	
+	count = 0;
 }
 
 
-void Analyzer::update(){
-
+void Analyzer::update(){	
+	if(gui->addPerson) {
+		gui->addPerson = false;
+		count += 1;
+	}
 }
 
 
