@@ -12,12 +12,18 @@ void Gui::setup(){
 	playAudio = 1;
 	addPerson = 1;
 	
-	gui.addTitle("Analyzer");
+	
+	gui.addTitle("Debug");
+	gui.addButton("Add person", addPerson);
+	
+	
+	gui.addTitle("Analyzer").setNewColumn(true);
 	gui.addSlider("Depth threshold", depthThreshold, 0, 255);
-	gui.addSlider("Blur", blur, 0, 30);//.setNewColumn(true);
-    gui.addSlider("Merge distance", analyzerMergeDist,0,100);
+	gui.addSlider("Blur", blur, 0, 30);
+	gui.addSlider("Merge distance", analyzerMergeDist,0,100);
     gui.addSlider("Blob min size", minBlobSize,0,640*480);
-    gui.addSlider("Blob max size", maxBlobSize,0,640*480);
+    gui.addSlider("Blob max size", maxBlobSize,0,640*480).setNewColumn(true);
+	
     
 	gui.addTitle("Clients").setNewColumn(true);
     for(int i=0;i<NUM_CLIENTS;i++){
@@ -27,7 +33,11 @@ void Gui::setup(){
         gui.addSlider("Client"+ofToString(i)+"OffsetY", clientOffsetY[i], -100, 100);//.setNewColumn(true);
 
     }
-
+	
+	gui.addPage("Speech synth");
+	gui.addToggle("Play audio", playAudio);
+	
+	
     gui.addPage("Cropping");
     topCrop = 0;
     gui.addSlider("ClientTopCrop", topCrop, 0, 640);//.setNewColumn(true);
@@ -40,11 +50,6 @@ void Gui::setup(){
         rightCrop[i] = 0;
         gui.addSlider("Client"+ofToString(i)+"RightCrop", rightCrop[i], 0, 640);//.setNewColumn(true);
     }
-	
-	gui.addTitle("Speech synth").setNewColumn(true);
-	gui.addToggle("Play audio", playAudio);
-	
-	gui.addButton("Add person", addPerson);
 	
 	gui.loadFromXML();
 	gui.show();

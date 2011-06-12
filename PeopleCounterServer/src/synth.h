@@ -18,8 +18,12 @@ public:
 	
 	map< string, int > voices;
 	
+	float lastMsgTime;
 	
-	vector< string > messages;
+	int shortmsgtime;
+	int longmsgtime;
+	
+	string message;
 	
 	int count;
 	int diff;

@@ -1,5 +1,9 @@
 #include "synth.h"
 
+
+string welcomeMsg[4] = { " Hi jerk" , " I love you!", " Didn't think I would see you here", " Welcome to Roskilde Festival" };
+
+
 void Synth::setup(Analyzer * analyzeRef, Gui * guiRef){
 	
 	analyzer = analyzeRef;
@@ -9,13 +13,9 @@ void Synth::setup(Analyzer * analyzeRef, Gui * guiRef){
 	
 	synth.initSynthesizer();
 	
-	string messages[] = {"Welcome to Roskilde Festival", 
-		"Hi jerk", "Hi you, remember me?", 
-		"I love you!", 
-		"Didn't think I would see you again."};
-	
-	
 	voices = synth.getListOfVoices();
+	
+	lastMsgTime = -10;
 	
 	if(voices.size() > 0)
     {
@@ -26,8 +26,6 @@ void Synth::setup(Analyzer * analyzeRef, Gui * guiRef){
         }
     }
 	
-	analyzer->count += 1;
-	
 }
 
 void Synth::update(){
@@ -35,12 +33,21 @@ void Synth::update(){
 	if (analyzer->count > count) {
 		
 		diff = analyzer->count - count;
-		count = analyzer->count;
 		
-		say("hi visitor number" + ofToString(count), "Whisper");
+		if (ofGetElapsedTimef() - lastMsgTime > 3) {
+			// wait for old msg to finish
+			
+			count = analyzer->count;
+			// + welcomeMsg[2]
+			
+			say("Hi visitor number" + ofToString(count), "Whisper");
+			
+			lastMsgTime = ofGetElapsedTimef();
+		}
+		
+		
 
 	}
-	
 }
 
 
