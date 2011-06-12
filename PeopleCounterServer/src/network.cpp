@@ -92,7 +92,7 @@ void Network::debugDraw(){
 void Network::receiveMessage(string message, int client){
 //	cout<<"Recv "<<message<<endl;
 	if(message.substr(0,1) == "b"){
-		analyzer->blobData[client].clear();
+        analyzer->markNewFrame(client);
 	}
 	if(message.substr(0,1) == "i"){
 		bufferObject.bid = atoi(message.substr(1,message.length()-1).c_str());
@@ -108,7 +108,7 @@ void Network::receiveMessage(string message, int client){
 	}
 	if(message.substr(0,1) == "h"){
 		bufferObject.h = atoi(message.substr(1,message.length()-1).c_str());
-		analyzer->blobData[client].push_back(bufferObject);
+        analyzer->addBlobData(bufferObject, client);
 	}
 	
 }

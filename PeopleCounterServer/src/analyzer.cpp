@@ -40,6 +40,7 @@ void Analyzer::debugDraw(){
         
         ofDrawBitmapString("Client "+ofToString(i), 10, 25);
         glPopMatrix();
+        
 
     }
 
@@ -66,4 +67,48 @@ void Analyzer::debugDraw(){
     
     glPopMatrix();
 	
+}
+
+//Is called by network when new data is incomming. 
+//Here we delete blobs that where not present in the last frame
+void Analyzer::markNewFrame(int client){
+   // blobData[client].clear();
+    for(int i=0;i<blobData[client].size();i++){
+        if(!blobData[client][i].inFrame){
+            blobData[client].erase(blobData[client].begin()+i);
+        }
+    }
+
+    for(int i=0;i<blobData[client].size();i++){
+        blobData[client][i].inFrame = false;
+    }
+}
+
+//Is called by network every time it receives a new packet
+void Analyzer::addBlobData(blob_data newData, int client){
+    bool blobFound = false;
+    for(int i=0;i<blobData[client].size();i++){
+        //Check if the blob id (bid) is already in the vector, then just update the data
+        if(blobData[client][i].bid == newData.bid){
+            blobFound = true;
+            blobData[client][i].x = newData.x;
+            blobData[client][i].y = newData.y;
+            blobData[client][i].w = newData.w;
+            blobData[client][i].h = newData.h;
+            blobData[client][i].inFrame = true;
+            break;
+        }
+    }
+
+    if(!blobFound){        
+        //If the blob was not already in the vector, lets add it and give it some birth information
+        newData.birth = ofGetElapsedTimeMillis();
+        newData.birthX = newData.x;
+        newData.birthY = newData.y;
+        newData.isCounted = false;
+        newData.inFrame = true;
+        
+        blobData[client].push_back(newData);   
+    }
+    
 }
