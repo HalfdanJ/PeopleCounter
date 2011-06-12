@@ -13,7 +13,7 @@ void Tracker::setup(Kinect* kinectRef){
 	blur = 30;
 	
 	next_id = 0;
-
+	
 	minSize = 20;
 	maxSize = (640*480)/2;
 	leftCrop = 0;
@@ -30,7 +30,7 @@ void cvBlob2Polygon(ofxCvBlob* blob, gpc_polygon* output) {
 	
 	
 	output->contour->num_vertices = blob->nPts;
-//	vertices.vertex = (gpc_vertex*) malloc(sizeof(gpc_vertex)*blob->nPts);
+	//	vertices.vertex = (gpc_vertex*) malloc(sizeof(gpc_vertex)*blob->nPts);
 	
 	for(int i = 0; i<blob->nPts; i++) {
 		gpc_vertex curPoint;
@@ -63,7 +63,7 @@ bool blobsEqual(blob_data* old, blob_data* cur, float threshold) {
 	nPts = cur->cvBlob.nPts;
 	gpc_vertex * cur_p_arr = (gpc_vertex *) malloc(sizeof(gpc_vertex)*nPts);
 	cur_p_list.vertex = cur_p_arr;
-
+	
 	
 	cvBlob2Polygon(&cur->cvBlob, &cur_p);
 	
@@ -75,7 +75,7 @@ bool blobsEqual(blob_data* old, blob_data* cur, float threshold) {
 	if(result.num_contours == 0)
 		return false;
 	
-
+	
 	float diff = fabs(1 - avg / result.contour->num_vertices);
 	
 	return diff <= threshold;
@@ -89,17 +89,17 @@ void Tracker::update(){
 		int blobsIdentified = 0; // Unused as of yet. 
 		
 		grayImage.setFromPixels(kinect->kinect.getDepthPixels(), 640, 480);
-      
-
+		
+		
 		
 		//grayImageThreshold.setROI(leftCrop, topCrop, (640-leftCrop)- rightCrop, (480-topCrop)- bottomCrop);
-
+		
 		crop();
-
+		
 		grayImageThreshold = grayImage;
 		grayImageThreshold.threshold(threshold, false);
         
-
+		
         
 		if(blur > 0){
 			grayImageThreshold.blur(blur);
@@ -121,19 +121,51 @@ void Tracker::update(){
 			
 			// Looping through last frame's blobs to match these new ones
 			// to the old ones, and to apply their IDs.
-			for(int i=0; i < oldBlobs.size(); i++) {
+			for(int j=0; j < oldBlobs.size(); j++) {
 				
 				// Checks the centroid of an oldBlob, and checks if its 
 				// distance to the current blob is less than the threshold.
 				// If it is, then it's safe to let it have the old one's ID.
 				
 				//if (ofDistSquared(blob.x, blob.y, oldBlobs[i].x, oldBlobs[i].y) < movement_threshold) {
-				if (blobsEqual(&blob, &oldBlobs[i], 1.1)) {
-					blob.bid = oldBlobs[i].bid;
-					blobsIdentified++;
-					break;
+				if (blobsEqual(&blob, &oldBlobs[j], 1.1)) {
+					if(blob.bid==-1){
+						blob.bid = oldBlobs[j].bid;
+						if (oldBlobs[j].secondaryIt && oldBlobs[j].secondaryBids.size() > 0) {							
+							oldBlobs[j].bid = oldBlobs[j].secondaryBids[0];
+							blob.bid = oldBlobs[j].bid;
+
+							oldBlobs[j].secondaryBids.erase(oldBlobs[j].secondaryBids.begin());
+							for(int k=0;k<blobData.size();k++){
+								for(int l=0;l<blobData[k].secondaryBids.size();l++){
+									if(blobData[k].secondaryBids[l] == blob.bid){
+										blobData[k].secondaryBids.erase(blobData[k].secondaryBids.begin()+l);
+									}
+								}
+							}
+						}
+						
+						oldBlobs[j].secondaryIt = true;
+						
+						blob.secondaryBids = oldBlobs[j].secondaryBids;
+
+
+						blobsIdentified++;
+					} else {
+						bool found = false;
+						for(int l=0;l<blob.secondaryBids.size();l++){
+							if(blob.secondaryBids[l] == oldBlobs[j].bid)
+								found = true;
+							break;
+						}
+
+					//	if(!found){
+							blob.secondaryBids.push_back(oldBlobs[j].bid);						
+						//	blob.secondaryBids.insert(blob.secondaryBids.end(), oldBlobs[j].secondaryBids.begin(), oldBlobs[j].secondaryBids.end());
+					//	}
+					}
 				}
-				 
+				
 			}
 			
 			// Check if the blob hasn't been matched with an old one. It
@@ -142,6 +174,8 @@ void Tracker::update(){
 				//		  cout<<next_id<<endl;
 				blob.bid = next_id++;
 			}
+			
+			blob.secondaryIt = false;
 			
 			// At this point any blob has x and y coordinates for its
 			// centroid, plus an ID, either inherited or new.
@@ -158,7 +192,7 @@ void Tracker::debugDraw(){
 	ofSetColor(255, 255, 255);
 	grayImage.draw(640,0,320,240);
 	
-
+	
 	grayImageThreshold.draw(640+320,0,320,240);
 	contourFinder.draw(640, 0, 320, 240);
 	
@@ -166,46 +200,52 @@ void Tracker::debugDraw(){
 	ofSetColor(255, 0, 0);
 	for(int i=0;i<blobData.size();i++){
 		ofRect(blobData[i].x-5, blobData[i].y-5, 10, 10);
-		ofDrawBitmapString(ofToString(blobData[i].bid, 0)+"\ndiff: "+ofToString(blobData[i].blobDiff,4), blobData[i].x+12, blobData[i].y);
+		string str = ofToString(blobData[i].bid, 0);
+		for(int j=0;j<blobData[i].secondaryBids.size();j++){
+		//	cout<<"yay sec "<<j<<endl;
+			str += "\n"+ofToString(blobData[i].secondaryBids[j], 0);
+		}
+		
+		ofDrawBitmapString(str, blobData[i].x+12, blobData[i].y);
 	}
-
+	
 	ofNoFill();
 	ofSetColor(255,0,0);
 	ofRect(leftCrop, topCrop, (640-leftCrop)- rightCrop, (480-topCrop)- bottomCrop);
 }
 
 void Tracker::crop(){
-			int nPoints = 4;
-		CvPoint _cp[4];
-		_cp[0].x = 0; _cp[0].y = 0;
-		_cp[1].x = leftCrop; _cp[1].y = 0;
-		_cp[2].x = leftCrop; _cp[2].y = 480;
-		_cp[3].x = 0; _cp[3].y = 480;
-
-		CvPoint * cp = _cp;
-		cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
-
-		_cp[0].x = 640-rightCrop; _cp[0].y = 0;
-		_cp[1].x = 640; _cp[1].y = 0;
-		_cp[2].x = 640; _cp[2].y = 480;
-		_cp[3].x = 640-rightCrop; _cp[3].y = 480;
-		cp = _cp;
-		cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
-
-
-		_cp[0].x = 0; _cp[0].y = 0;
-		_cp[1].x = 640; _cp[1].y = 0;
-		_cp[2].x = 640; _cp[2].y = topCrop;
-		_cp[3].x = 0; _cp[3].y = topCrop;
-		cp = _cp;
-		cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
-
-		_cp[0].x = 0; _cp[0].y = 480-bottomCrop;
-		_cp[1].x = 640; _cp[1].y = 480-bottomCrop;
-		_cp[2].x = 640; _cp[2].y = 480;
-		_cp[3].x = 0; _cp[3].y = 480;
-		cp = _cp;
-		cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
-
-		grayImage.flagImageChanged();
+	int nPoints = 4;
+	CvPoint _cp[4];
+	_cp[0].x = 0; _cp[0].y = 0;
+	_cp[1].x = leftCrop; _cp[1].y = 0;
+	_cp[2].x = leftCrop; _cp[2].y = 480;
+	_cp[3].x = 0; _cp[3].y = 480;
+	
+	CvPoint * cp = _cp;
+	cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
+	
+	_cp[0].x = 640-rightCrop; _cp[0].y = 0;
+	_cp[1].x = 640; _cp[1].y = 0;
+	_cp[2].x = 640; _cp[2].y = 480;
+	_cp[3].x = 640-rightCrop; _cp[3].y = 480;
+	cp = _cp;
+	cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
+	
+	
+	_cp[0].x = 0; _cp[0].y = 0;
+	_cp[1].x = 640; _cp[1].y = 0;
+	_cp[2].x = 640; _cp[2].y = topCrop;
+	_cp[3].x = 0; _cp[3].y = topCrop;
+	cp = _cp;
+	cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
+	
+	_cp[0].x = 0; _cp[0].y = 480-bottomCrop;
+	_cp[1].x = 640; _cp[1].y = 480-bottomCrop;
+	_cp[2].x = 640; _cp[2].y = 480;
+	_cp[3].x = 0; _cp[3].y = 480;
+	cp = _cp;
+	cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
+	
+	grayImage.flagImageChanged();
 }

@@ -1,6 +1,7 @@
 
 #include "synth.h"
 
+
 int openChannels = 0;
 
 pascal void speakDoneCallback(SpeechChannel vC, long vRefCnt);
@@ -41,15 +42,14 @@ void Synth::setup(Analyzer * analyzeRef, Gui * guiRef){
 	msgPrefix.push_back("Greetings");
 	msgPrefix.push_back("Yo");
 	
-	msgAttrib.push_back("beauty");
-	msgAttrib.push_back("human");
-	msgAttrib.push_back("strange");
-	msgAttrib.push_back("weirdo");
 	
 	msgSuffix.push_back("enjoy the festival.");
 	msgSuffix.push_back("stay safe.");
 	msgSuffix.push_back("peace out.");
-	msgSuffix.push_back("you have been counted.");
+	msgSuffix.push_back("you have officially been counted.");
+	msgSuffix.push_back("you look great today.");
+	msgSuffix.push_back("you rock.");
+	msgSuffix.push_back("you walk nice.");
 	
 	voice = voices.at(1);
 	
@@ -67,7 +67,8 @@ void Synth::setup(Analyzer * analyzeRef, Gui * guiRef){
 }
 
 void Synth::update(){
-	activityBar *= 0.98;
+	//activityBar *= 0.98;
+	activityBar = queue.size();
 	
 	
 	if (openChannels == 0) {
@@ -83,7 +84,9 @@ void Synth::update(){
 	if (analyzer->count > count) {
 		
 		diff = analyzer->count - count;
-		activityBar += diff;
+		//activityBar += diff;
+		
+		string suffix = ", " + msgSuffix.at(rand() % msgSuffix.size());
 			
 		count = analyzer->count;
 		// + welcomeMsg[2]
@@ -98,21 +101,12 @@ void Synth::update(){
 					
 		} else if (activityBar > LOW_ACTIVITY && queue.size() > 0) {
 			addMsg(" and " + ofToString(count), voice, 1);
-			
-			addMsg(", to roskilde festival!", voice, 0);
+			addMsg(suffix, voice, 0);
 			
 		} else {			
 			voice = voices.at(rand() % voices.size());
-			
-			string s1 = msgPrefix.at(rand() % msgPrefix.size());
-			
-			string s3 = msgSuffix.at(rand() % msgSuffix.size());
-			
-			
-			
-			addMsg("Welcome, you are guest number " + ofToString(count), voice, 1);
-			
-			addMsg(", ", voice, 0);
+			addMsg("Welcome, you are guest number " + ofToString(count), voice, 1);			
+			addMsg(suffix, voice, 0);
 		}
 		
 		
