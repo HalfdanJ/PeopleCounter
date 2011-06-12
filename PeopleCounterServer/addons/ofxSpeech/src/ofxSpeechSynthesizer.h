@@ -43,7 +43,7 @@
         //-- Pauses speaking immediatly, even if it's in the middle of a sentence or word.
         //-- It can be resumed with continue speaking
         void pauseSpeaking();
-        
+		
         //-- Stops speaking completely.
         void stopSpeaking();
         

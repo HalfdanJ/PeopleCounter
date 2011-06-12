@@ -1,7 +1,7 @@
 #ifndef PeopleCounterServer_defines_h
 #define PeopleCounterServer_defines_h
 
-#define NUM_CLIENTS 3
+#define NUM_CLIENTS 2
 
 
 

@@ -1,6 +1,5 @@
 #pragma once
 
-//#include "network.h"
 #include "ofMain.h"
 #include "defines.h"
 
@@ -9,22 +8,25 @@ public:
 	void setup();
 	void update();
 	void draw();
-	
 	void keyPressed(int key);
-	
-	ofColor aColor;
-	
-	
-	// analyzer variables
+		
+	// analyzer
 	int		depthThreshold;
-	int		blur;
-	
-	// network variables
-	int		slave1id;
-	int		slave2id;
-	int		slave3id;
-	
-    int clientOffset[NUM_CLIENTS];
+	int		blur;	
+	bool	addPerson;
+    float   analyzerMergeDist;
 
+	// network
+    int clientOffsetX[NUM_CLIENTS];
+    int clientOffsetY[NUM_CLIENTS];
+    
+    int leftCrop[NUM_CLIENTS];
+    int rightCrop[NUM_CLIENTS];
+    int topCrop;
+    int bottomCrop;
+    
+
+	// synth 
+	bool playAudio;
 	
 };
