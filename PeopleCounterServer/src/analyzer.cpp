@@ -2,10 +2,17 @@
 
 void Analyzer::setup(Gui * guiRef){
     gui = guiRef;
+	
+	count = 0;
 }
 
 
 void Analyzer::update(){
+    if(gui->addPerson) {
+		gui->addPerson = false;
+		count += 1;
+	}
+    
     combinedBlobs.clear();
     for(int client=0;client<NUM_CLIENTS;client++){
         for(int i=0;i<blobData[client].size();i++){
@@ -53,7 +60,7 @@ void Analyzer::update(){
             }
         }
     }
-    
+
 }
 
 

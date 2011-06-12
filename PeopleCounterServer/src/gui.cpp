@@ -1,13 +1,16 @@
 #include "gui.h"
 #include "ofxSimpleGuiToo.h"
 
-void Gui::setup(){	
-	
-	depthThreshold = 100;
-	blur = 0;
+void Gui::setup(){
 	
 	ofBackground(0, 0, 0);
 	ofSetVerticalSync(true);
+	
+	// set defaults
+	depthThreshold = 100;
+	blur = 0;
+	playAudio = 1;
+	addPerson = 1;
 	
 	gui.addTitle("Analyzer");
 	gui.addSlider("Depth threshold", depthThreshold, 0, 255);
@@ -35,6 +38,11 @@ void Gui::setup(){
         rightCrop[i] = 0;
         gui.addSlider("Client"+ofToString(i)+"RightCrop", rightCrop[i], 0, 640);//.setNewColumn(true);
     }
+	
+	gui.addTitle("Speech synth").setNewColumn(true);
+	gui.addToggle("Play audio", playAudio);
+	
+	gui.addButton("Add person", addPerson);
 	
 	gui.loadFromXML();
 	gui.show();
