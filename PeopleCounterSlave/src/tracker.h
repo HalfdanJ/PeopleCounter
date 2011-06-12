@@ -37,6 +37,7 @@ public:
 
 	int next_id;
 
+	void crop();
 private:
 	vector<blob_data> oldBlobs;
 };

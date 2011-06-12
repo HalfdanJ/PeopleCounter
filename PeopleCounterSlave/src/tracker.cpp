@@ -11,6 +11,11 @@ void Tracker::setup(Kinect* kinectRef){
 	blur = 30;
 	
 	next_id = 0;
+
+	leftCrop = 0;
+	bottomCrop = 0;
+	rightCrop = 0;
+	topCrop = 0;
 }
 
 
@@ -21,7 +26,13 @@ void Tracker::update(){
 		int blobsIdentified = 0; // Unused as of yet. 
 		
 		grayImage.setFromPixels(kinect->kinect.getDepthPixels(), 640, 480);
-        grayImageThreshold.setROI(100, 100, 200, 200);
+      
+
+		
+		//grayImageThreshold.setROI(leftCrop, topCrop, (640-leftCrop)- rightCrop, (480-topCrop)- bottomCrop);
+
+		crop();
+
 		grayImageThreshold = grayImage;
 		grayImageThreshold.threshold(threshold, false);
         
@@ -78,6 +89,8 @@ void Tracker::update(){
 void Tracker::debugDraw(){
 	ofSetColor(255, 255, 255);
 	grayImage.draw(640,0,320,240);
+	
+
 	grayImageThreshold.draw(640+320,0,320,240);
 	contourFinder.draw(640, 0, 320, 240);
 	
@@ -87,4 +100,44 @@ void Tracker::debugDraw(){
 		ofRect(blobData[i].x-5, blobData[i].y-5, 10, 10);
 		ofDrawBitmapString(ofToString(blobData[i].bid, 0), blobData[i].x+12, blobData[i].y);
 	}
+
+	ofNoFill();
+	ofSetColor(255,0,0);
+	ofRect(leftCrop, topCrop, (640-leftCrop)- rightCrop, (480-topCrop)- bottomCrop);
+}
+
+void Tracker::crop(){
+			int nPoints = 4;
+		CvPoint _cp[4];
+		_cp[0].x = 0; _cp[0].y = 0;
+		_cp[1].x = leftCrop; _cp[1].y = 0;
+		_cp[2].x = leftCrop; _cp[2].y = 480;
+		_cp[3].x = 0; _cp[3].y = 480;
+
+		CvPoint * cp = _cp;
+		cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
+
+		_cp[0].x = 640-rightCrop; _cp[0].y = 0;
+		_cp[1].x = 640; _cp[1].y = 0;
+		_cp[2].x = 640; _cp[2].y = 480;
+		_cp[3].x = 640-rightCrop; _cp[3].y = 480;
+		cp = _cp;
+		cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
+
+
+		_cp[0].x = 0; _cp[0].y = 0;
+		_cp[1].x = 640; _cp[1].y = 0;
+		_cp[2].x = 640; _cp[2].y = topCrop;
+		_cp[3].x = 0; _cp[3].y = topCrop;
+		cp = _cp;
+		cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
+
+		_cp[0].x = 0; _cp[0].y = 480-bottomCrop;
+		_cp[1].x = 640; _cp[1].y = 480-bottomCrop;
+		_cp[2].x = 640; _cp[2].y = 480;
+		_cp[3].x = 0; _cp[3].y = 480;
+		cp = _cp;
+		cvFillPoly(grayImage.getCvImage(), &cp, &nPoints, 1, cvScalar(0,0,0,10));
+
+		grayImage.flagImageChanged();
 }
