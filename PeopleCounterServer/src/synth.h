@@ -14,7 +14,7 @@ struct msg {
 	int pitch;
 };
 
-#define LOW_ACTIVITY 1.1
+#define LOW_ACTIVITY 0.9
 #define NORMAL_ACTIVITY 2
 #define HIGH_ACTIVITY 4
 

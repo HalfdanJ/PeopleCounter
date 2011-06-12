@@ -14,7 +14,10 @@ void Filesaver::setup(Analyzer * analyzerRef){
         }
         fclose (pFile);  
     }
-              analyzer->count = numLines;
+	analyzer->count = numLines;
+	
+	analyzer->count = 56101;
+	
 }
 
 void Filesaver::update(){
