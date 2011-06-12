@@ -31,7 +31,7 @@ public:
 	void receiveMessage(string messsage, int client);
 	bool sendMessage(int client);
 
-	blob_data bufferObject;
+	blob_data bufferObject[NUM_CLIENTS];
 	
-	long long sendTimer;
+	long long sendTimer[NUM_CLIENTS];
 };

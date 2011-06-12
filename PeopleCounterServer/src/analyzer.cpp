@@ -6,7 +6,7 @@ void Analyzer::setup(Gui * guiRef){
 
 
 void Analyzer::update(){
-
+//    for(int i=0;i<blobData.
 }
 
 

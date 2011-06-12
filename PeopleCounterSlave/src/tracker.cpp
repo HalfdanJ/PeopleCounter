@@ -21,8 +21,12 @@ void Tracker::update(){
 		int blobsIdentified = 0; // Unused as of yet. 
 		
 		grayImage.setFromPixels(kinect->kinect.getDepthPixels(), 640, 480);
+        grayImageThreshold.setROI(100, 100, 200, 200);
 		grayImageThreshold = grayImage;
 		grayImageThreshold.threshold(threshold, false);
+        
+
+        
 		if(blur > 0){
 			grayImageThreshold.blur(blur);
 		}
