@@ -49,7 +49,10 @@ bool blobsEqual(blob_data* old, blob_data* cur, float threshold) {
 	gpc_polygon old_p;
 	gpc_vertex_list old_p_list;
 	old_p.contour = &old_p_list;
-	gpc_vertex old_p_arr[old->cvBlob.nPts];
+	int nPts = old->cvBlob.nPts;
+	gpc_vertex * old_p_arr = (gpc_vertex *) malloc(sizeof(gpc_vertex)*nPts);
+	
+	
 	old_p_list.vertex = old_p_arr;
 	
 	cvBlob2Polygon(&old->cvBlob, &old_p);
@@ -57,7 +60,8 @@ bool blobsEqual(blob_data* old, blob_data* cur, float threshold) {
 	gpc_polygon cur_p;
 	gpc_vertex_list cur_p_list;
 	cur_p.contour = &cur_p_list;
-	gpc_vertex cur_p_arr[cur->cvBlob.nPts];
+	nPts = cur->cvBlob.nPts;
+	gpc_vertex * cur_p_arr = (gpc_vertex *) malloc(sizeof(gpc_vertex)*nPts);
 	cur_p_list.vertex = cur_p_arr;
 
 	
