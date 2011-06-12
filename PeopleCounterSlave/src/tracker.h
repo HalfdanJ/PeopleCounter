@@ -11,6 +11,10 @@ struct blob_data {
 	float h;
 	ofxCvBlob cvBlob;
 	float blobDiff;
+	
+	vector<int> secondaryBids;
+	
+	bool secondaryIt;
 };
 
 class Tracker {
