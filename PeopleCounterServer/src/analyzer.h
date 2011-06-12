@@ -16,6 +16,9 @@ struct blob_data {
     float birthX;
     float birthY;
     bool inFrame;
+    
+   vector<int> childrenBid;
+    bool foundInThisFrame;
 };
 
 
@@ -38,5 +41,7 @@ public:
     int currentCount;
     
     vector<blob_data> combinedBlobs;
+    
+    float onePersonArea;
     
 };

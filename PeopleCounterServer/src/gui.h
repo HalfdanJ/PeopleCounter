@@ -12,9 +12,13 @@ public:
 		
 	// analyzer
 	int		depthThreshold;
-	int		blur;	
 	bool	addPerson;
-    float   analyzerMergeDist;
+    float   analyzerMergeDist;    
+
+    //Client
+	int		blur;	
+    int     minBlobSize;
+    int     maxBlobSize;
 
 	// network
     int clientOffsetX[NUM_CLIENTS];

@@ -4,8 +4,11 @@ void Analyzer::setup(Gui * guiRef){
     gui = guiRef;
 	
 	count = 0;
+    
+    onePersonArea = 40000;
 }
 
+int combined_id;
 
 void Analyzer::update(){
     if(gui->addPerson) {
@@ -13,36 +16,86 @@ void Analyzer::update(){
 		count += 1;
 	}
     
-    combinedBlobs.clear();
+    for(int u=0;u<combinedBlobs.size();u++){
+        combinedBlobs[u].foundInThisFrame = false;
+    }
+    
+    //combinedBlobs.clear();
     for(int client=0;client<NUM_CLIENTS;client++){
         for(int i=0;i<blobData[client].size();i++){
+            //Go through all new data
             bool alreadyAdded = false;
+
             for(int u=0;u<combinedBlobs.size();u++){
-                //Check if already added by another client
-                if(ofDist(combinedBlobs[u].x, 
-                          combinedBlobs[u].y, 
-                          blobData[client][i].x+gui->clientOffsetX[client], 
-                          blobData[client][i].y+gui->clientOffsetY[client]) < gui->analyzerMergeDist){
-                   
-                    //If this blob is older, so lets use that one
-                    if(combinedBlobs[u].birth > blobData[client][i].birth){
-                        combinedBlobs[u] = blobData[client][i];
-                        combinedBlobs[u].x += gui->clientOffsetX[client];
-                        combinedBlobs[u].y += gui->clientOffsetY[client];
-                        combinedBlobs[u].birthX += gui->clientOffsetX[client];
-                        combinedBlobs[u].birthY += gui->clientOffsetY[client];
+                //Check if bid is already in the combined blob
+                int bestBirth = -1;
+                for(int j=0;j<combinedBlobs[u].childrenBid.size();j++){
+                    if(combinedBlobs[u].childrenBid[j] == blobData[client][i].bid){
+                        combinedBlobs[u].foundInThisFrame = true;
+                        
+                        //The bid is here
+                        if(bestBirth == -1 || bestBirth > blobData[client][i].birth){
+                            //The blob is the oldes so far, so it updates the combined blob's position
+                            combinedBlobs[u].x = blobData[client][i].x + gui->clientOffsetX[client];
+                            combinedBlobs[u].y = blobData[client][i].y + gui->clientOffsetY[client];
+                            combinedBlobs[u].w = blobData[client][i].w;
+                            combinedBlobs[u].h = blobData[client][i].h; 
+                            combinedBlobs[u].birth = blobData[client][i].birth;
+                            bestBirth = blobData[client][i].birth;
+                        }
+                        alreadyAdded = true;
+                        break;
                     }
-                    alreadyAdded = true;
-                }               
+                }
+
             }
+            
             if(!alreadyAdded){
-                //If the blob is not already added, we add it
+            //if the blob was not already in a combined blobs list over bids, lets see if it should be    
+                for(int u=0;u<combinedBlobs.size();u++){
+                    //Check if already added by another client
+                    if(ofDist(combinedBlobs[u].x, 
+                              combinedBlobs[u].y, 
+                              blobData[client][i].x+gui->clientOffsetX[client], 
+                              blobData[client][i].y+gui->clientOffsetY[client]) < gui->analyzerMergeDist){
+
+                        combinedBlobs[u].foundInThisFrame = true;
+                        
+                        //Add it to the list over bids
+                        combinedBlobs[u].childrenBid.push_back(blobData[client][i].bid);
+
+                        if(combinedBlobs[u].birth > blobData[client][i].birth){
+                            //If this blob is older, so lets use that one
+                            combinedBlobs[u].x = blobData[client][i].x + gui->clientOffsetX[client];
+                            combinedBlobs[u].y = blobData[client][i].y + gui->clientOffsetY[client];
+                            combinedBlobs[u].w = blobData[client][i].w;
+                            combinedBlobs[u].h = blobData[client][i].h; 
+                            combinedBlobs[u].birth = blobData[client][i].birth;
+                        }
+                        alreadyAdded = true;
+                    }               
+                }
+            }
+            
+            
+            if(!alreadyAdded){
+                //If the blob is not already added, we make a new combined blob
                 combinedBlobs.push_back(blobData[client][i]);   
                 combinedBlobs[combinedBlobs.size()-1].x += gui->clientOffsetX[client];
                 combinedBlobs[combinedBlobs.size()-1].y += gui->clientOffsetY[client];
                 combinedBlobs[combinedBlobs.size()-1].birthX += gui->clientOffsetX[client];
                 combinedBlobs[combinedBlobs.size()-1].birthY += gui->clientOffsetY[client];
+
+                combinedBlobs[combinedBlobs.size()-1].childrenBid.push_back(blobData[client][i].bid);
+                combinedBlobs[combinedBlobs.size()-1].foundInThisFrame = true;
             } 
+        }
+    }
+    
+    //Lets see if some of the combined blobs have dissapeard
+    for(int u=0;u<combinedBlobs.size();u++){
+        if(!combinedBlobs[u].foundInThisFrame){
+            combinedBlobs.erase(combinedBlobs.begin()+u);
         }
     }
     
@@ -55,7 +108,10 @@ void Analyzer::update(){
                 //The distance the blob has gone
                 if(fabs(combinedBlobs[i].birthY - combinedBlobs[i].y) > 100){
                     combinedBlobs[i].isCounted = true;
-                    count++;
+                    int persons = floor((combinedBlobs[i].w*combinedBlobs[i].h) / onePersonArea);
+                    if(persons < 1)
+                        persons = 1;
+                    count+=persons;
                 }
             }
         }
@@ -126,7 +182,7 @@ void Analyzer::debugDraw(){
         
         for(int i=0;i<combinedBlobs.size();i++){
             if(combinedBlobs[i].isCounted){
-                ofSetColor(255, 0, 0);    
+                ofSetColor(0, 255, 0);    
             } else {
                 ofSetColor(0, 0, 255);    
             }
@@ -136,13 +192,18 @@ void Analyzer::debugDraw(){
                    combinedBlobs[i].w, 
                    combinedBlobs[i].h);
             float dist = fabs(combinedBlobs[i].birthY - combinedBlobs[i].y);
-            ofDrawBitmapString(ofToString(combinedBlobs[i].bid, 0)+"\ndist: "+ofToString(dist), 
+            float area = combinedBlobs[i].w*combinedBlobs[i].h;
+            ofDrawBitmapString(ofToString(combinedBlobs[i].bid, 0)+
+                               "\ndist: "+ofToString(dist,0)+
+                               "\nsize: "+ofToString(area,0)+ " (="+ofToString(area/onePersonArea,1)+" person)", 
                                combinedBlobs[i].x, combinedBlobs[i].y);
+            
+            ofLine(combinedBlobs[i].birthX, combinedBlobs[i].birthY, combinedBlobs[i].x, combinedBlobs[i].y);
         }        
     }glPopMatrix();
     
     ofSetColor(255, 255, 255);
-    ofDrawBitmapString("Total count: "+ofToString(count), 20, -20);
+    ofDrawBitmapString("Total count: "+ofToString(count), ofGetWidth()-200, -20);
 
     
     glPopMatrix();

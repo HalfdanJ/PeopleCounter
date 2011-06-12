@@ -16,7 +16,9 @@ void Gui::setup(){
 	gui.addSlider("Depth threshold", depthThreshold, 0, 255);
 	gui.addSlider("Blur", blur, 0, 30);//.setNewColumn(true);
     gui.addSlider("Merge distance", analyzerMergeDist,0,100);
-
+    gui.addSlider("Blob min size", minBlobSize,0,640*480);
+    gui.addSlider("Blob max size", maxBlobSize,0,640*480);
+    
 	gui.addTitle("Clients").setNewColumn(true);
     for(int i=0;i<NUM_CLIENTS;i++){
         clientOffsetX[i] = 320*i;
