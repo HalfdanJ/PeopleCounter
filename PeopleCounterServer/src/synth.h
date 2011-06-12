@@ -14,21 +14,31 @@ public:
 	
 	void setup(Analyzer * analyzer, Gui * gui);
 	void update();
-	void say(string msg, string voice);
+	void say(string msg, string voice, int rate = -1, int pitch = -1);
 	
-	map< string, int > voices;
+	vector< string > voices;
+	vector< string > msgPrefix;
+	vector< string > msgAttrib;
+	vector< string > msgSuffix;
 	
 	float lastMsgTime;
 	
-	int shortmsgtime;
-	int longmsgtime;
+	//int shortmsgtime;
+	//int longmsgtime;
 	
+	string voice;
 	string message;
+	
+	int maxActivity;
 	
 	int count;
 	int diff;
 	
 	ofxSpeechSynthesizer    synth;
+	
+	
+	float activityBar;
+	//void speechDone();
 };
 
 

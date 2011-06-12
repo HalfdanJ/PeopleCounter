@@ -57,11 +57,12 @@
         //-- This spelling out includes digits as well (bug maybe?)
         void setCharacterByCharacter(bool enabled);
         
-    private:
+	 SpeechChannel               speechChannel;
+
+ private:
         std::map<std::string, int>  voices;
         std::string                 currentVoice;
         bool                        isSpeaking;
-        SpeechChannel               speechChannel;
         
  };
  #endif
