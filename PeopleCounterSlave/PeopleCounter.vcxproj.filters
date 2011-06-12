@@ -45,17 +45,17 @@
       <Filter>addons\ofxKinect\src</Filter>
     </ClCompile>
     <ClCompile Include="src\network.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.cpp">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscSender.cpp">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,23 +141,23 @@
       <Filter>addons\ofxKinect\src</Filter>
     </ClInclude>
     <ClInclude Include="src\network.h" />
-    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOsc.h">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetwork.h">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscArg.h">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.h">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.h">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.h">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.h">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.h">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.h">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.h">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscSender.h">
-      <Filter>addons\ofxOsc\src</Filter>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.h">
+      <Filter>addons\ofxNetwork\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,11 +185,11 @@
     <Filter Include="addons\ofxKinect\src">
       <UniqueIdentifier>{1a9db4e3-1039-4573-bd2c-21956ec8f97f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxOsc">
-      <UniqueIdentifier>{6ec72fbd-61d0-4972-aac0-cce65433be59}</UniqueIdentifier>
+    <Filter Include="addons\ofxNetwork">
+      <UniqueIdentifier>{5c258d73-71f1-4b2b-939d-14d1c4faa4d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxOsc\src">
-      <UniqueIdentifier>{45175eb7-26cb-465e-a545-265caa6352a4}</UniqueIdentifier>
+    <Filter Include="addons\ofxNetwork\src">
+      <UniqueIdentifier>{03214500-f685-4a47-8be5-97a9ba179b75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

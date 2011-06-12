@@ -11,19 +11,24 @@ void Network::setup(Analyzer * analyzeRef, Gui * guiRef){
 		clientPing[i] = 0;
 	}
 	
-	//TCP[0].setup("192.38.71.110", 1111);
+	TCP[0].setup("192.38.71.154", 1111);
+    TCP[1].setup("192.38.71.161", 1111);
+
 //	TCP[0].setup("localhost", 1111);
-    	TCP[0].setup("halfdanjmacbook.local", 1111);
+//    	TCP[0].setup("halfdanjmacbook.local", 1111);
 //	TCP[0].setup("10.16.9.48", 1111);
-	sendTimer = 0;
+    for(int i=0;i<NUM_CLIENTS;i++){
+        sendTimer[i] = 0;
+    }
 }
 
 
 void Network::update(){
-	sendTimer--;
+
 	
 	
 	for(int i=0;i<NUM_CLIENTS;i++){
+        sendTimer[i]--;
 		if(clientConnected[i]){
 			clientTimeout[i] --;
 			if(clientTimeout[i] < 0  ){
@@ -33,8 +38,8 @@ void Network::update(){
 		}
 		
 		//Send a message to the client
-		if(sendTimer < ofGetElapsedTimeMillis() && sendMessage(i)){
-			sendTimer = ofGetElapsedTimeMillis()+50;
+		if(sendTimer[i] < ofGetElapsedTimeMillis() && sendMessage(i)){
+			sendTimer[i] = ofGetElapsedTimeMillis()+50;
 			
 			//Receive messages that are waiting for us
 			string recvstr = TCP[i].receive();
@@ -95,20 +100,20 @@ void Network::receiveMessage(string message, int client){
         analyzer->markNewFrame(client);
 	}
 	if(message.substr(0,1) == "i"){
-		bufferObject.bid = atoi(message.substr(1,message.length()-1).c_str());
+		bufferObject[client].bid = atoi(message.substr(1,message.length()-1).c_str());
 	}
 	if(message.substr(0,1) == "x"){
-		bufferObject.x = atoi(message.substr(1,message.length()-1).c_str());
+		bufferObject[client].x = atoi(message.substr(1,message.length()-1).c_str());
 	}
 	if(message.substr(0,1) == "y"){
-		bufferObject.y = atoi(message.substr(1,message.length()-1).c_str());
+		bufferObject[client].y = atoi(message.substr(1,message.length()-1).c_str());
 	}
 	if(message.substr(0,1) == "w"){
-		bufferObject.w = atoi(message.substr(1,message.length()-1).c_str());
+		bufferObject[client].w = atoi(message.substr(1,message.length()-1).c_str());
 	}
 	if(message.substr(0,1) == "h"){
-		bufferObject.h = atoi(message.substr(1,message.length()-1).c_str());
-        analyzer->addBlobData(bufferObject, client);
+		bufferObject[client].h = atoi(message.substr(1,message.length()-1).c_str());
+        analyzer->addBlobData(bufferObject[client], client);
 	}
 	
 }

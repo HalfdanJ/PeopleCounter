@@ -7,11 +7,16 @@ void Analyzer::setup(Gui * guiRef){
 }
 
 
+<<<<<<< HEAD
 void Analyzer::update(){	
 	if(gui->addPerson) {
 		gui->addPerson = false;
 		count += 1;
 	}
+=======
+void Analyzer::update(){
+//    for(int i=0;i<blobData.
+>>>>>>> 1c291d98f90123240e927f97ef982b446bfbe4e9
 }
 
 

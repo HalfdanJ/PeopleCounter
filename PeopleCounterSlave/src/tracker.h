@@ -27,11 +27,17 @@ public:
 	int threshold;
 	int movement_threshold;
 	int blur;
+    
+    int topCrop;
+    int bottomCrop;
+    int leftCrop;
+    int rightCrop;
 	
 	vector<blob_data> blobData;
 
 	int next_id;
 
+	void crop();
 private:
 	vector<blob_data> oldBlobs;
 };

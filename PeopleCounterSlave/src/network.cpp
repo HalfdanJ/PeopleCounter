@@ -1,6 +1,7 @@
 #include "network.h"
 
 void Network::setup(Tracker* trackerRef){
+	ofSetLogLevel(OF_LOG_SILENT);
 	tracker = trackerRef;
 	
 	TCP.setup(1111);
@@ -28,14 +29,17 @@ void Network::update(){
 	for(int i = 0; i < TCP.getNumClients(); i++){		
 		bool gotMsg = false;
 		string recvstr = TCP.receive(i);
-		char * pch;
-		pch = strtok ((char*)recvstr.c_str(),";");
-		while (pch != NULL)
-		{
-			gotMsg = true;
-			timeout = 500;
-			receiveMessage(pch);
-			pch = strtok (NULL, ";");
+		while(recvstr.length() > 0){
+			char * pch;
+			pch = strtok ((char*)recvstr.c_str(),";");
+			while (pch != NULL)
+			{
+				gotMsg = true;
+				timeout = 500;
+				receiveMessage(pch);
+				pch = strtok (NULL, ";");
+			}
+			recvstr = TCP.receive(i);
 		}
 		if(gotMsg){
 			sendMessage(i);
@@ -74,7 +78,18 @@ void Network::receiveMessage(string message){
 	if(message.substr(0,1) == "b"){
 		tracker->blur = atoi(message.substr(1,message.length()-1).c_str());
 	}
-	
+	if(message.substr(0,1) == "L"){
+		tracker->leftCrop = atoi(message.substr(1,message.length()-1).c_str());
+	}
+	if(message.substr(0,1) == "T"){
+		tracker->topCrop = atoi(message.substr(1,message.length()-1).c_str());
+	}
+	if(message.substr(0,1) == "R"){
+		tracker->rightCrop = atoi(message.substr(1,message.length()-1).c_str());
+	}
+	if(message.substr(0,1) == "B"){
+		tracker->bottomCrop = atoi(message.substr(1,message.length()-1).c_str());
+	}
 }
 
 void Network::sendMessage(int client){
