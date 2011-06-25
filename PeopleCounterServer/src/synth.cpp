@@ -1,4 +1,3 @@
-
 #include "synth.h"
 
 
@@ -43,13 +42,15 @@ void Synth::setup(Analyzer * analyzeRef, Gui * guiRef){
 	msgPrefix.push_back("Yo");
 	
 	
-	msgSuffix.push_back("enjoy the festival.");
+	msgSuffix.push_back("rock out.");
 	msgSuffix.push_back("stay safe.");
 	msgSuffix.push_back("peace out.");
 	msgSuffix.push_back("you have officially been counted.");
 	msgSuffix.push_back("you look great today.");
 	msgSuffix.push_back("you rock.");
 	msgSuffix.push_back("you walk nice.");
+        msgSuffix.push_back("I think trains are fun.");
+        msgSuffix.push_back("you are just one of many.");
 	
 	voice = voices.at(1);
 	
