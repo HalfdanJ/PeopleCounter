@@ -17,6 +17,7 @@ void Analyzer::update(){
     if(gui->addPerson) {
 		gui->addPerson = false;
 		count += 1;
+        addedCount += 1;
 	}
     
     for(int u=0;u<combinedBlobs.size();u++){

@@ -10,4 +10,9 @@ public:
     void setup(Analyzer * analyzer);
     void update();
     void debugDraw();
+    
+    int countOfLastHour();
+    int currentTime();
+    
+    vector<int> hourVector;
 };
