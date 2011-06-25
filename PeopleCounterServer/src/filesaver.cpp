@@ -19,8 +19,6 @@ void Filesaver::setup(Analyzer * analyzerRef){
             /* Get each line from the infile */
             numLines++;
             /* print the line number and data */
-            printf("Line %d: %s", numLines, line);  
-            
             string time = string(line).substr(0,10);
             int iTime;;
             sscanf(time.c_str(), "%d", &iTime);
@@ -45,9 +43,7 @@ int Filesaver::currentTime(){
     return rawtime;
 }
 
-void Filesaver::update(){
-    cout<<countOfLastHour()<<endl;
-    
+void Filesaver::update(){   
     int rawtime = currentTime();
     
 

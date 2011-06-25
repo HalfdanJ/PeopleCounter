@@ -10,7 +10,7 @@ void testApp::setup(){
     filesaver = new Filesaver();
 	
 	gui->setup();
-	analyzer->setup(gui);
+	analyzer->setup(gui, filesaver);
     filesaver->setup(analyzer);
 	network->setup(analyzer, gui);
 	synth->setup(analyzer, gui);

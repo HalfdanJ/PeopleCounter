@@ -1,7 +1,9 @@
 #include "analyzer.h"
+#include "filesaver.h"
 
-void Analyzer::setup(Gui * guiRef){
+void Analyzer::setup(Gui * guiRef, Filesaver * filesaverRef){
     gui = guiRef;
+    filesaver = filesaverRef;
 	
 	count = 0;
     
@@ -258,4 +260,8 @@ void Analyzer::addBlobData(blob_data newData, int client){
         blobData[client].push_back(newData);   
     }
     
+}
+
+int Analyzer::hourCount(){
+    return filesaver->countOfLastHour();
 }

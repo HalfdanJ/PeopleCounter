@@ -22,15 +22,16 @@ struct blob_data {
 };
 
 
-
+class Filesaver;
 
 class Analyzer {
 public:
-	void setup(Gui * gui);
+	void setup(Gui * gui, Filesaver * filesaverRef);
 	void update();
 	void debugDraw();
 	
     Gui * gui;
+    Filesaver * filesaver;
     
 	vector< blob_data > blobData[NUM_CLIENTS];
     
@@ -41,6 +42,8 @@ public:
     int addedCount;
     
     int currentCount;
+    
+    int hourCount();
     
     vector<blob_data> combinedBlobs;
     
