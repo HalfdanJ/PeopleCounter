@@ -40,15 +40,15 @@ void Synth::setup(Analyzer * analyzeRef, Gui * guiRef){
 	msgPrefix.push_back("Hi");
 	msgPrefix.push_back("Welcome");
 	msgPrefix.push_back("Greetings");
-	msgPrefix.push_back("Yo");
+//	msgPrefix.push_back("Yo");
 	
 	
-	msgSuffix.push_back("enjoy the festival.");
+	msgSuffix.push_back("i hope you enjoy the festival.");
 	msgSuffix.push_back("stay safe.");
 	msgSuffix.push_back("peace out.");
 	msgSuffix.push_back("you have officially been counted.");
 	msgSuffix.push_back("you look great today.");
-	msgSuffix.push_back("you rock.");
+	msgSuffix.push_back(", have a nice train trip.");
 	msgSuffix.push_back("you walk nice.");
 	
 	voice = voices.at(1);
@@ -98,6 +98,7 @@ void Synth::update(){
 		
 		if (activityBar > HIGH_ACTIVITY) {
 			say(ofToString(count), voice, 400);
+            queue.clear();
 					
 		} else if (activityBar > LOW_ACTIVITY && queue.size() > 0) {
 			addMsg(" and " + ofToString(count), voice, 1);
@@ -105,7 +106,7 @@ void Synth::update(){
 			
 		} else {			
 			voice = voices.at(rand() % voices.size());
-			addMsg("Welcome, you are guest number " + ofToString(count), voice, 1);			
+			addMsg("Welcome, you are trainguest number " + ofToString(count), voice, 1);			
 			addMsg(suffix, voice, 0);
 		}
 		

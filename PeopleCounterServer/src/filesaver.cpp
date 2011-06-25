@@ -16,14 +16,14 @@ void Filesaver::setup(Analyzer * analyzerRef){
     }
 	analyzer->count = numLines;
 	
-	analyzer->count = 56101;
+//	analyzer->count = 56101;
 	
 }
 
 void Filesaver::update(){
     time_t rawtime;  
     struct tm * timeinfo;  
-    time ( &rawtime );  
+    time ( &rawtime );   
     timeinfo = localtime ( &rawtime );  
     
 
