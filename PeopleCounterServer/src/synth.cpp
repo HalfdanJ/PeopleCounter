@@ -106,7 +106,7 @@ void Synth::update(){
 			
 		} else {			
 			voice = voices.at(rand() % voices.size());
-			addMsg("Welcome, you are guest number " + ofToString(count), voice, 1);			
+			addMsg("Hi, you are number " + ofToString(count), voice, 1);			
 			addMsg(suffix, voice, 0);
 		}
 		
