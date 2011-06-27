@@ -8,12 +8,14 @@ void testApp::setup(){
 	analyzer = new Analyzer();
 	synth = new Synth();
     filesaver = new Filesaver();
+    timetable = new Timetable();
 	
 	gui->setup();
 	analyzer->setup(gui, filesaver);
     filesaver->setup(analyzer);
 	network->setup(analyzer, gui);
 	synth->setup(analyzer, gui);
+    timetable->setup();
 
     ofBackground(0,0,0);
     ofSetFrameRate(30);
@@ -26,6 +28,8 @@ void testApp::update(){
 	analyzer->update();
 	network->update();
 	synth->update();
+    
+//    cout<<timetable->getNextTime()<<endl; //Test timetable
 }
 
 //--------------------------------------------------------------

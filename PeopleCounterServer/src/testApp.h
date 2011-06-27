@@ -6,6 +6,7 @@
 #include "network.h"
 #include "synth.h"
 #include "filesaver.h"
+#include "timetable.h"
 #include "defines.h"
 
 class testApp : public ofBaseApp{
@@ -20,6 +21,7 @@ class testApp : public ofBaseApp{
 	Analyzer * analyzer;
     Synth * synth;
     Filesaver * filesaver;
+    Timetable * timetable;
 
 		void keyPressed  (int key);
 		void keyReleased(int key);
